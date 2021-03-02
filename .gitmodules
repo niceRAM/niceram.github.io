@@ -1,0 +1,7 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/niceRAM/niceram.github.io.git
+	branch = renew
+[submodule "themes/mogege"]
+	path = themes/mogege
+	url = https://github.com/niceRAM/mogege.git
