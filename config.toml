@@ -1,0 +1,94 @@
+baseURL = "https://niceram.xyz/"
+languageCode = "zh-CN"
+title = "NiceBlog"
+copyright = "" # 版权说明
+hasCJKLanguage = true # 统计汉字
+theme = "mogege" # 主题 (需要自己下载)
+
+paginate = 11 # 每页的文章数
+enableEmoji = true # 支持 Emoji
+enableRobotsTXT = true # 支持 robots.txt
+# googleAnalytics = "" # Google 统计 id
+
+# Chroma 代码高亮 http://gohugo.io/content-management/syntax-highlighting/
+pygmentsUseClasses=true # 使用自定义的代码高亮样式
+[markup]
+  [markup.highlight]
+    codeFences = true
+    anchorLineNos = false
+    guessSyntax = false
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = false
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+
+[Permalinks]
+ posts = "/:year/:month/:day/:filename"
+
+[menu]
+  # [[menu.main]]
+  #   name = "🔧Tools"
+  #   url = "/tools/"
+  #   weight = 1
+
+  [[menu.main]]
+    name = "📚Blog"
+    url = "/posts/"
+    weight = 2
+
+  [[menu.main]]
+    name = "📂Categories"
+    url = "/categories/"
+    weight = 3
+
+  [[menu.main]]
+    name = "📌Tags"
+    url = "/tags/"
+    weight = 4
+
+  [[menu.main]]
+    name = "💬About"
+    url = "/about/"
+    weight = 5
+
+[params]
+  since = "2018" # 站点建立时间
+  author = "niceRAM" # 作者名字
+  avatar = ""
+  subtitle = "The mountain of books has a road but I'm at a loss, and the sea of learning is unlimited so that I'm inundated." # 子标题
+  description = "niceRAM's Blog" # (Meta) 描述
+  license= '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
+
+  enableGitalk = true # gitalk 评论系统
+  toc = true # 是否开启目录
+  autoCollapseToc = false   # Auto expand and collapse toc
+  #mathjax = false # 是否使用mathjax（数学公式）
+
+  [params.custom]
+  js = ["https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"]
+
+  ## 评论系统。
+  [params.gitalk] # Github: https://github.com/gitalk/gitalk
+    clientId = "e2ac76297f1e7ec232f9" # Your client ID
+    clientSecret = "4385d32dd8c6ab5f97856bbe2e04a1e05a237276" # Your client secret
+    repo = "blog-comments" # The repo to store comments
+    owner = "niceRAM" # Your GitHub ID
+    admin= "niceRAM" # Required. Github repository owner and collaborators. (Users who having write access to this repository)
+    id= "location.pathname" # The unique id of the page.
+    labels= "gitalk" # Github issue labels. If you used to use Gitment, you can change it
+    perPage= 15 # Pagination size, with maximum 100.
+    pagerDirection= "last" # Comment sorting direction, available values are 'last' and 'first'.
+    createIssueManually= false # If it is 'false', it is auto to make a Github issue when the administrators login.
+    distractionFreeMode= true # Enable hot key (cmd|ctrl + enter) submit comment.
+    proxy= "https://cors-anywhere-niceblog.herokuapp.com/https://github.com/login/oauth/access_token"
+
+  [params.social]
+    GitHub = "niceRAM"
+    Twitter = "niceRAM9503"
+    Email = "niceniceram@gmail.com"
+    Telegram = "niceRAM"
+    Bilibili = "10929768"
