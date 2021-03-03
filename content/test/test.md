@@ -285,6 +285,4 @@ Alice <-- Bob: Another authentication Response
 
 # Test 6
 ## Embedded BiliBili video
-```txt
-{{< bilibili BV1Nb411U7KP 1 >}}
-```
+{{< bilibili BV1Nb411U7KP >}}
