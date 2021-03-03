@@ -78,7 +78,7 @@ pygmentsUseClasses = true # 使用自定义的代码高亮样式
     labels = "gitalk" # Github issue labels. If you used to use Gitment, you can change it
     perPage = 15 # Pagination size, with maximum 100.
     pagerDirection = "last" # Comment sorting direction, available values are 'last' and 'first'.
-    createIssueManually = false # If it is 'false', it is auto to make a Github issue when the administrators login.
+    createIssueManually = true # If it is 'false', it is auto to make a Github issue when the administrators login.
     distractionFreeMode = true # Enable hot key (cmd|ctrl + enter) submit comment.
     proxy = "https://cors-anywhere-niceblog.herokuapp.com/https://github.com/login/oauth/access_token"
 
