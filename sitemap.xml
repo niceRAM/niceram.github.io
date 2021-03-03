@@ -12,23 +12,19 @@
     </url>
   
     <url>
-      <loc>https://niceram.xyz/categories/</loc>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>https://niceram.xyz/</loc>
       
+      <lastmod>1000-01-01T00:00:00+00:00</lastmod>
+      
       
       
       
     </url>
   
     <url>
-      <loc>https://niceram.xyz/tags/</loc>
+      <loc>https://niceram.xyz/test/test/</loc>
+      
+      <lastmod>1000-01-01T00:00:00+00:00</lastmod>
       
       
       
@@ -37,6 +33,24 @@
   
     <url>
       <loc>https://niceram.xyz/test/</loc>
+      
+      <lastmod>1000-01-01T00:00:00+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://niceram.xyz/categories/</loc>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://niceram.xyz/tags/</loc>
       
       
       
