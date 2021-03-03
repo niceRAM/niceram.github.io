@@ -3,7 +3,7 @@ languageCode = "zh-CN"
 title = "NiceBlog"
 copyright = "" # 版权说明
 hasCJKLanguage = true # 统计汉字
-theme = "mogege" # 主题 (需要自己下载)
+theme = "nicesima" # 主题
 
 paginate = 11 # 每页的文章数
 enableEmoji = true # 支持 Emoji
