@@ -61,7 +61,7 @@
     "datePublished": "1000-01-01 00:00:00 \u002b0000 UTC",
     "dateModified" : "1000-01-01 00:00:00 \u002b0000 UTC",
     "url" : "https:\/\/niceram.xyz\/test\/test\/",
-    "wordCount" : "461",
+    "wordCount" : "465",
     "keywords" : [  "NiceBlog"]
 }
 </script>
@@ -159,7 +159,7 @@
                 </span>
                 in
                 
-                <span class="post-word-count">461 words</span>
+                <span class="post-word-count">465 words</span>
         </div>
     </header>
 
@@ -167,7 +167,7 @@
           <div class="post-toc" id="post-toc">
    <h2 class="post-toc-title"></h2>
    
-   <div class="post-toc-content always-active">
+   <div class="post-toc-content">
      <nav id="TableOfContents">
   <ul>
     <li><a href="#测试组">测试组</a></li>
@@ -216,6 +216,10 @@
      var fixTop = fix.offset().top, fixHeight = fix.height();
      var endTop, miss;
      var offsetTop = fix[0].offsetTop;
+     $('.post-toc-content:not(.always-active) a').click(function (e) {
+      $('.post-toc-content li').removeClass('has-active');
+      $(e.target).parents('.post-toc-content li').addClass('has-active');
+     })
      $(window).scroll(function () {
        var docTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
        if (end.length > 0) {
@@ -233,7 +237,7 @@
          fix.css({ 'position': 'absolute' });
          fix.css({ top: offsetTop });
        }
-     })
+     }).scroll()
    }
  </script> 
 	
@@ -254,9 +258,7 @@
         
         
 
-        <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>这是一个隐藏的页面，仅用于测试本博客的各项新特性。</p>
+        <p>这是一个隐藏的页面，仅用于测试本博客的各项新特性。</p>
 <h1 id="test-1">Test 1</h1>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln">1</span><span class="p">{</span>
@@ -277,7 +279,7 @@
 <span class="ln">7</span>
 <span class="ln">8</span>    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">rlist</span><span class="p">)</span>
 </code></pre></div><h2 id="测试组">测试组</h2>
-<span class="spoiler" > 隐藏文字 </span>
+<p><span class="spoiler">隐藏文字</span>可见文字</p>
 <h1 id="test-2">Test 2</h1>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
 <h2 id="测试组-1">测试组</h2>
@@ -360,9 +362,9 @@ Alice &lt;-- Bob: Another authentication Response
             <p class="copyright-item">
                 <span>Author:</span>
                 <span>niceRAM </span>
-                </p>
+            </p>
             
-
+            
             
             <p class="copyright-item">
                     <span>Link:</span>
@@ -389,6 +391,48 @@ Alice &lt;-- Bob: Another authentication Response
         
         
     </div>
+
+    
+    <div class="post-social">
+        <div class="social-links">
+            
+<style type="text/css">
+@font-face {
+  font-family: 'iconfont';   
+  src: url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.eot');
+  src: url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.svg#iconfont') format('svg');
+}
+</style>
+
+
+
+<a href="https://space.bilibili.com/10929768/channel/detail?cid=12977" target="_blank" rel="me noopener"><i class="iconfont icon-bilibili"></i></a>
+
+
+<a href="https://github.com/niceRAM" target="_blank" rel="me noopener"><i class="iconfont icon-github"></i></a>
+
+
+
+<a href="https://twitter.com/niceRAM95" target="_blank" rel="me noopener"><i class="iconfont icon-twitter"></i></a>
+
+ 
+
+<a href="mailto:niceniceram@gmail.com" rel="me noopener"><i class="iconfont icon-mail01"></i></a>
+
+
+
+<a href="https://t.me/niceRAM" target="_blank" rel="me noopener"><i class="iconfont icon-telegram"></i></a>
+
+
+
+
+        </div>
+    </div>
+    
 
     <div class="post-comment">
         
@@ -429,15 +473,13 @@ Alice &lt;-- Bob: Another authentication Response
         
         <span itemprop="copyrightYear">2018 - 2021</span>
         
-        <span class="with-love">
-    	 <i class="iconfont icon-love"></i>
-         </span>
+        <span class="rotating">🌸</span>
          
             <span class="author" itemprop="copyrightHolder"><a href="https://niceram.xyz/">niceRAM</a> | </span>
          
 
          
-		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/niceRAM/nicesima" target="_blank" rel="external nofollow">nicesima</a></span>
     </div>
 </footer>
 
@@ -447,6 +489,7 @@ Alice &lt;-- Bob: Another authentication Response
 
 
 <script defer src="/js/vendor_main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" crossorigin="anonymous"></script>
 
 
 
@@ -476,10 +519,6 @@ Alice &lt;-- Bob: Another authentication Response
 
 <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script> pangu.spacingPage();</script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" crossorigin="anonymous"></script>
 
 
 

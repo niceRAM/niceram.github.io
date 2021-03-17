@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="niceRAM">
+    <meta name="description" content="niceRAM&#39;s Blog">
+    
+    
+    
+    
+    <link rel="canonical" href="https://niceram.xyz/2021/03/04/20210304_1125/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            Hugo 静态博客食用指南 | NiceBlog
+        
+    </title>
+    <meta name="title" content="Hugo 静态博客食用指南 | NiceBlog">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+<link rel="stylesheet" href="/font/iconfont.css">
+
+<link rel="stylesheet" href="/font-ali/iconfont.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/niceram.xyz\/"
+    },
+    "articleSection" : "posts",
+    "name" : "Hugo 静态博客食用指南",
+    "headline" : "Hugo 静态博客食用指南",
+    "description" : "之前的博客源码还没来得及 push 就因为电脑硬盘损坏而夭折，不过近期重建了， 仍使用 Hugo， 在此主要记录下博客的搭建过程中 Hugo 的相关操作。 Note: 标注 [*] 的为",
+    "inLanguage" : "zh-CN",
+    "author" : "niceRAM",
+    "creator" : "niceRAM",
+    "publisher": "niceRAM",
+    "accountablePerson" : "niceRAM",
+    "copyrightHolder" : "niceRAM",
+    "copyrightYear" : "2021",
+    "datePublished": "2021-03-04 11:25:03 \u002b0800 CST",
+    "dateModified" : "2021-03-04 11:25:03 \u002b0800 CST",
+    "url" : "https:\/\/niceram.xyz\/2021\/03\/04\/20210304_1125\/",
+    "wordCount" : "4604",
+    "keywords" : [ "Hugo","静态博客","教程", "NiceBlog"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://niceram.xyz/">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">📚Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">📂Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">📌Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">💬About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://niceram.xyz/">NiceBlog</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>📚Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>📂Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>📌Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>💬About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Hugo 静态博客食用指南</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://niceram.xyz/" rel="author">niceRAM</a> with ♥
+                <span class="post-time">
+                on <time datetime=2021-03-04 itemprop="datePublished">March 4, 2021</time>
+                </span>
+                in
+                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        
+                        
+                        
+                          <a href="https://niceram.xyz/categories/%E5%85%B3%E4%BA%8E%E6%88%91%E6%83%B3%E7%8E%A9%E5%8D%B4%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%BC%9A%E7%8E%A9%E8%BF%98%E6%9C%89%E5%8F%AF%E8%83%BD%E7%8E%A9%E5%9D%8F%E5%8D%9A%E5%AE%A2%E8%BF%99%E4%BB%B6%E4%BA%8B/"> 关于我想玩却不一定会玩还有可能玩坏博客这件事, </a>
+                        
+                        
+                </span>
+                <span class="post-word-count">4604 words</span>
+        </div>
+    </header>
+
+    
+          <div class="post-toc" id="post-toc">
+   <h2 class="post-toc-title"></h2>
+   
+   <div class="post-toc-content">
+     <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装-hugo">安装 Hugo</a>
+      <ul>
+        <li><a href="#从--github--下载安装">从  GitHub  下载安装</a></li>
+        <li><a href="#通过--chocolatey--安装">通过  Chocolatey  安装</a></li>
+        <li><a href="#验证安装">*验证安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#初始化">初始化</a></li>
+    <li><a href="#安装主题">安装主题</a></li>
+    <li><a href="#网站配置">网站配置</a></li>
+    <li><a href="#原型模板">*原型模板</a>
+      <ul>
+        <li><a href="#默认模板">默认模板</a></li>
+        <li><a href="#配置格式">配置格式</a></li>
+        <li><a href="#修改示例">修改示例</a></li>
+      </ul>
+    </li>
+    <li><a href="#新建文章">新建文章</a></li>
+    <li><a href="#网站预览">网站预览</a>
+      <ul>
+        <li><a href="#又是亿点点废话">又是亿点点废话</a></li>
+      </ul>
+    </li>
+    <li><a href="#生成静态网站">生成静态网站</a></li>
+  </ul>
+</nav>
+   </div>
+ </div>
+ <script type="text/javascript">
+   window.onload = function () {
+     var fix = $('.post-toc');
+     var end = $('.post-comment');
+     var fixTop = fix.offset().top, fixHeight = fix.height();
+     var endTop, miss;
+     var offsetTop = fix[0].offsetTop;
+     $('.post-toc-content:not(.always-active) a').click(function (e) {
+      $('.post-toc-content li').removeClass('has-active');
+      $(e.target).parents('.post-toc-content li').addClass('has-active');
+     })
+     $(window).scroll(function () {
+       var docTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+       if (end.length > 0) {
+         endTop = end.offset().top;
+         miss = endTop - docTop - fixHeight;
+       }
+       if (fixTop < docTop) {
+         fix.css({ 'position': 'fixed' });
+         if ((end.length > 0) && (endTop < (docTop + fixHeight))) {
+           fix.css({ top: miss });
+         } else {
+           fix.css({ top: 0 });
+         }
+       } else {
+         fix.css({ 'position': 'absolute' });
+         fix.css({ top: offsetTop });
+       }
+     }).scroll()
+   }
+ </script> 
+	
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+          <img src="https://d33wubrfki0l68.cloudfront.net/c38c7334cc3f23585738e40334284fddcaf03d5e/2e17c/images/hugo-logo-wide.svg" class="featured_image">
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <p>之前的博客源码还没来得及 push 就因为电脑硬盘损坏而夭折，不过近期重建了，
+仍使用 <a href="https://github.com/gohugoio/hugo">Hugo</a>，
+在此主要记录下博客的搭建过程中 Hugo 的相关操作。</p>
+<p><em><strong>Note:</strong> 标注 <strong>[*]</strong> 的为非必要环节，可略过</em></p>
+<h2 id="安装-hugo">安装 Hugo</h2>
+<h3 id="从--github--下载安装">从  GitHub  下载安装</h3>
+<p>说是安装，实际上官方发布的 Hugo 是绿色软件，
+只需要从 <a href="https://github.com/gohugoio/hugo/releases">GitHub 发布页面</a> 
+根据自己的OS下载对应版本的压缩包，然后可执行文件解压至任目录下，
+随后将该目录 
+
+<a 
+
+  
+  
+    href="https://www.google.com/search?q=%e8%bf%bd%e5%8a%a0%e5%88%b0%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f"
+   
+
+target="_blank"><i class="iconfont icon-search">追加到环境变量</i></a>
+ <code>PATH</code> 中即可。</p>
+<h3 id="通过--chocolatey--安装">通过  Chocolatey  安装</h3>
+<p>如果你使用的操作系统是 Windows 碰巧又安装了 <a href="https://chocolatey.org/">Chocolatey</a>，
+那么使用以下命令安装会更方便，以至于无需手动配置环境变量。</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>choco install hugo -y
+</code></pre></div><p>或者安装 extended 版本</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>choco install hugo-extended -y
+</code></pre></div><p><em><strong>Note:</strong> 本站使用的主题是 <a href="https://github.com/niceRAM/nicesima">nicesima</a>，需要安装 <strong>extended</strong> 版本以支持 SASS</em></p>
+<h3 id="验证安装">*验证安装</h3>
+<p>任意目录下启动命令行工具并执行以下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo version
+</code></pre></div><p>如果有类似下面的打印输出，就说明安装成功（根据安装的 Hugo 版本，打印的内容会有些许不同）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/niceRAM/blog-images/img/20210304_1125/2021/03/11/00-52-51-708-b8efc9.png" alt=""></p>
+<h2 id="初始化">初始化</h2>
+<p>创建 Hugo 站点的第一步，是使用 Hugo 初始化一个新项目。</p>
+<p>选个自己喜欢的目录，启动命令行工具，<code>cd</code>  切换进去，接着执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo new site blog
+</code></pre></div><p>上述命令会在当前目录下创建一个 <code>blog</code> 文件夹，你博客的所有源码都将存放在这个目录下。</p>
+<p>通常，这个文件夹的初始目录结构应该和下面是一样的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/niceRAM/blog-images/img/20210304_1125/2021/03/11/00-53-25-611-9e04aa.png" alt=""></p>
+<p>下面简单说下这些目录/文件是干什么的：</p>
+<ul>
+<li>archetypes/: 原型模板目录
+<ul>
+<li>default.md: 默认原型。下面的 <a href="#%E5%AE%9A%E4%B9%89%E9%BB%98%E8%AE%A4%E5%8E%9F%E5%9E%8B">定义默认原型</a> 中再讲解</li>
+</ul>
+</li>
+<li>content/: 网站内容目录
+<ul>
+<li>存放 Markdown 文件</li>
+</ul>
+</li>
+<li>data/: 数据模板目录
+<ul>
+<li>用于存放<code>.yaml</code>,<code>.json</code>或<code>.toml</code>文件用于某些高级操作，
+<span class="spoiler">因为我还不熟，</span>这次我们不用它</li>
+</ul>
+</li>
+<li>layouts/: 布局模板目录
+<ul>
+<li>用于存放<code>.html</code>文件，Markdown 会渲染成什么样的静态网站，
+几乎就是靠布局模板决定的。当然，通常这里并不需要自己操刀，空着就行，
+完全可以将共通样式交给下面的 <a href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98">主题</a> 来完成</li>
+</ul>
+</li>
+<li>static/: 静态文件目录
+<ul>
+<li>该目录下的文件在 build 时将被拷贝到网站的根目录，通常用于存放网站图标 <code>favicon.ico</code></li>
+</ul>
+</li>
+<li>themes/: 主题目录
+<ul>
+<li>将下载的主题存放于此，Hugo 将根据指定的主题渲染网站</li>
+</ul>
+</li>
+<li>config.toml: 网站的配置文件</li>
+</ul>
+<h2 id="安装主题">安装主题</h2>
+<p>从 <a href="https://themes.gohugo.io/">Hugo Themes</a> 选一个自己喜欢的主题下载，
+有些定制主题没有上架，你也可以在 GitHub 搜索，或者善用搜索引擎(
+
+<a 
+
+  
+  
+    href="https://www.google.com/search?q=hugo%20theme"
+   
+
+target="_blank"><i class="iconfont icon-search">hugo theme</i></a>
+)。</p>
+<p>以本站主题为例，在 <code>blog</code> 目录执行以下命令安装主题</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>git clone https://github.com/niceRAM/nicesima.git themes/nicesima
+</code></pre></div><p><em><strong>Note:</strong> 如果你对 git 的使用相对熟练，这里更推荐你将主题添加为 submodule。</em></p>
+<h2 id="网站配置">网站配置</h2>
+<p>Hugo 支持三种配置格式：<code>yaml</code>, <code>toml</code>, <code>json</code>，默认为 <code>yaml</code>。
+也就是你的网站配置可以是 <code>config.yaml</code>, <code>config.toml</code> 或者 <code>config.json</code>，
+只不过 Hugo 默认只为你生成 <code>toml</code> 格式的配置文件。
+如果需要改用其他格式，你需要将现有的配置内容修改成相应的格式并重命名配置文件。</p>
+<p>通过初始化生成的默认配置文件 <code>config.toml</code> 中只有短短几行配置。</p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="ln">1</span><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;http://example.org/&#34;</span>
+<span class="ln">2</span><span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en-us&#34;</span>
+<span class="ln">3</span><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;My New Hugo Site&#34;</span>
+</code></pre></div><p>根据主题的不同，配置文件也有可能不同，很难细说。
+下面仅基于本站主题整理成模板以供参考。</p>
+<p><em><strong>Note:</strong> 标有[主题依赖]的配置是否有效取决于主题是否实现该功能（有可能标注不完整，仅供参考）</em></p>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="ln"> 1</span><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;https://niceram.xyz/&#34;</span>    <span class="c"># 博客网址</span>
+<span class="ln"> 2</span><span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;zh-CN&#34;</span>              <span class="c"># 网站语言。国际化需要</span>
+<span class="ln"> 3</span><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;NiceBlog&#34;</span>                  <span class="c"># 博客的名字。浏览器 title 上也会显示</span>
+<span class="ln"> 4</span><span class="nx">hasCJKLanguage</span> <span class="p">=</span> <span class="kc">true</span>               <span class="c"># 统计汉字</span>
+<span class="ln"> 5</span><span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;nicesima&#34;</span>                  <span class="c"># 主题</span>
+<span class="ln"> 6</span>
+<span class="ln"> 7</span><span class="nx">paginate</span> <span class="p">=</span> <span class="mi">11</span>                       <span class="c"># 每页的文章数</span>
+<span class="ln"> 8</span><span class="nx">enableEmoji</span> <span class="p">=</span> <span class="kc">true</span>                  <span class="c"># 支持 Emoji</span>
+<span class="ln"> 9</span><span class="nx">enableRobotsTXT</span> <span class="p">=</span> <span class="kc">true</span>              <span class="c"># 支持 robots.txt</span>
+<span class="ln">10</span><span class="nx">googleAnalytics</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>                <span class="c"># Google 统计 id</span>
+<span class="ln">11</span>
+<span class="ln">12</span><span class="c"># Chroma 代码高亮 http://gohugo.io/content-management/syntax-highlighting/</span>
+<span class="ln">13</span><span class="nx">pygmentsUseClasses</span> <span class="p">=</span> <span class="kc">true</span> <span class="c"># 使用自定义的代码高亮样式</span>
+<span class="ln">14</span><span class="p">[</span><span class="nx">markup</span><span class="p">]</span>
+<span class="ln">15</span>  <span class="p">[</span><span class="nx">markup</span><span class="p">.</span><span class="nx">highlight</span><span class="p">]</span>
+<span class="ln">16</span>    <span class="nx">codeFences</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">17</span>    <span class="nx">anchorLineNos</span> <span class="p">=</span> <span class="kc">false</span>
+<span class="ln">18</span>    <span class="nx">guessSyntax</span> <span class="p">=</span> <span class="kc">false</span>
+<span class="ln">19</span>    <span class="nx">hl_Lines</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+<span class="ln">20</span>    <span class="nx">lineAnchors</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+<span class="ln">21</span>    <span class="nx">lineNoStart</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="ln">22</span>    <span class="nx">lineNos</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">23</span>    <span class="nx">lineNumbersInTable</span> <span class="p">=</span> <span class="kc">false</span>
+<span class="ln">24</span>    <span class="nx">noClasses</span> <span class="p">=</span> <span class="kc">true</span>
+<span class="ln">25</span>    <span class="nx">style</span> <span class="p">=</span> <span class="s2">&#34;monokai&#34;</span>
+<span class="ln">26</span>    <span class="nx">tabWidth</span> <span class="p">=</span> <span class="mi">4</span>
+<span class="ln">27</span>
+<span class="ln">28</span><span class="p">[</span><span class="nx">Permalinks</span><span class="p">]</span>
+<span class="ln">29</span> <span class="nx">posts</span> <span class="p">=</span> <span class="s2">&#34;/:year/:month/:day/:filename&#34;</span>
+<span class="ln">30</span>
+<span class="ln">31</span><span class="p">[</span><span class="nx">menu</span><span class="p">]</span>
+<span class="ln">32</span>  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+<span class="ln">33</span>    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Blog&#34;</span>
+<span class="ln">34</span>    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/posts/&#34;</span>
+<span class="ln">35</span>    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">1</span>
+<span class="ln">36</span>
+<span class="ln">37</span>  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+<span class="ln">38</span>    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Categories&#34;</span>
+<span class="ln">39</span>    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/categories/&#34;</span>
+<span class="ln">40</span>    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">2</span>
+<span class="ln">41</span>
+<span class="ln">42</span>  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+<span class="ln">43</span>    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Tags&#34;</span>
+<span class="ln">44</span>    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/tags/&#34;</span>
+<span class="ln">45</span>    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">3</span>
+<span class="ln">46</span>
+<span class="ln">47</span>  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+<span class="ln">48</span>    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;About&#34;</span>
+<span class="ln">49</span>    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/about/&#34;</span>
+<span class="ln">50</span>    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">4</span>
+<span class="ln">51</span>
+<span class="ln">52</span><span class="p">[</span><span class="nx">params</span><span class="p">]</span>
+<span class="ln">53</span>  <span class="nx">since</span> <span class="p">=</span> <span class="s2">&#34;2018&#34;</span>                  <span class="c"># 站点建立时间。也是版权的开始年份</span>
+<span class="ln">54</span>  <span class="nx">author</span> <span class="p">=</span> <span class="s2">&#34;niceRAM&#34;</span>              <span class="c"># 作者名字</span>
+<span class="ln">55</span>  <span class="nx">avatar</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>                     <span class="c"># 头像</span>
+<span class="ln">56</span>  <span class="nx">subtitle</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+<span class="ln">57</span>  <span class="nx">description</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+<span class="ln">58</span>  <span class="nx">license</span> <span class="p">=</span> <span class="s1">&#39;本文采用&lt;a rel=&#34;license&#34; href=&#34;http://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34;&gt;知识共享署名-非商业性使用 4.0 国际许可协议&lt;/a&gt;进行许可&#39;</span>
+<span class="ln">59</span>
+<span class="ln">60</span>  <span class="nx">enableGitalk</span> <span class="p">=</span> <span class="kc">false</span>            <span class="c"># [主题依赖]gitalk 评论系统全局开关</span>
+<span class="ln">61</span>  <span class="nx">enableUtteranc</span> <span class="p">=</span> <span class="kc">true</span>           <span class="c"># [主题依赖]Utteranc 评论系统全局开关</span>
+<span class="ln">62</span>  <span class="nx">showPostSocialLinks</span> <span class="p">=</span> <span class="kc">true</span>      <span class="c"># [主题依赖]开启每一篇文章的 social-links 显示 (与主页显示与否无关)</span>
+<span class="ln">63</span>  <span class="nx">easySearchedEngine</span> <span class="p">=</span> <span class="s2">&#34;google&#34;</span>   <span class="c"># [主题依赖]Easy-Searched-Text 默认使用的搜索引擎</span>
+<span class="ln">64</span>  <span class="nx">toc</span> <span class="p">=</span> <span class="kc">true</span>                      <span class="c"># [主题依赖]是否开启目录</span>
+<span class="ln">65</span>  <span class="nx">autoCollapseToc</span> <span class="p">=</span> <span class="kc">false</span>         <span class="c"># [主题依赖]Auto expand and collapse toc</span>
+<span class="ln">66</span>  <span class="nx">mathjax</span> <span class="p">=</span> <span class="kc">true</span>                  <span class="c"># [主题依赖]是否使用mathjax（数学公式）</span>
+<span class="ln">67</span>
+<span class="ln">68</span>  <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">gitalk</span><span class="p">]</span> <span class="c"># [主题依赖]Github: https://github.com/gitalk/gitalk</span>
+<span class="ln">69</span>    <span class="nx">clientId</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Your client ID</span>
+<span class="ln">70</span>    <span class="nx">clientSecret</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Your client secret</span>
+<span class="ln">71</span>    <span class="nx">repo</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># The repo to store comments</span>
+<span class="ln">72</span>    <span class="nx">owner</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Your GitHub ID</span>
+<span class="ln">73</span>    <span class="nx">admin</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Required. Github repository owner and collaborators. (Users who having write access to this repository)</span>
+<span class="ln">74</span>    <span class="nx">id</span> <span class="p">=</span> <span class="s2">&#34;location.pathname&#34;</span> <span class="c"># The unique id of the page.</span>
+<span class="ln">75</span>    <span class="nx">labels</span> <span class="p">=</span> <span class="s2">&#34;gitalk&#34;</span> <span class="c"># Github issue labels. If you used to use Gitment, you can change it</span>
+<span class="ln">76</span>    <span class="nx">perPage</span> <span class="p">=</span> <span class="mi">15</span> <span class="c"># Pagination size, with maximum 100.</span>
+<span class="ln">77</span>    <span class="nx">pagerDirection</span> <span class="p">=</span> <span class="s2">&#34;last&#34;</span> <span class="c"># Comment sorting direction, available values are &#39;last&#39; and &#39;first&#39;.</span>
+<span class="ln">78</span>    <span class="nx">createIssueManually</span> <span class="p">=</span> <span class="kc">true</span> <span class="c"># If it is &#39;false&#39;, it is auto to make a Github issue when the administrators login.</span>
+<span class="ln">79</span>    <span class="nx">distractionFreeMode</span> <span class="p">=</span> <span class="kc">true</span> <span class="c"># Enable hot key (cmd|ctrl + enter) submit comment.</span>
+<span class="ln">80</span>    <span class="nx">proxy</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Set a proxy by &#39;cors-anywhere&#39;, &#39;cors-proxy&#39; or the thoers.</span>
+<span class="ln">81</span>
+<span class="ln">82</span>  <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">utteranc</span><span class="p">]</span> <span class="c"># [主题依赖]Homepage: https://utteranc.es</span>
+<span class="ln">83</span>    <span class="nx">repo</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># The repo to store comments</span>
+<span class="ln">84</span>    <span class="nx">issueTerm</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># the mapping between blog posts and GitHub issues. </span>
+<span class="ln">85</span>    <span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># Theme</span>
+<span class="ln">86</span>    <span class="nx">crossorigin</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span> <span class="c"># default: anonymous</span>
+<span class="ln">87</span>
+<span class="ln">88</span>  <span class="p">[</span><span class="nx">params</span><span class="p">.</span><span class="nx">social</span><span class="p">]</span> <span class="c"># [主题依赖]</span>
+<span class="ln">89</span>    <span class="nx">Bilibili</span> <span class="p">=</span> <span class="s2">&#34;uid&#34;</span>
+<span class="ln">90</span>    <span class="nx">Github</span> <span class="p">=</span> <span class="s2">&#34;github_id&#34;</span>
+<span class="ln">91</span>    <span class="nx">Linked</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">92</span>    <span class="nx">Twitter</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">93</span>    <span class="nx">Instagram</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">94</span>    <span class="nx">Email</span> <span class="p">=</span> <span class="s2">&#34;email&#34;</span>
+<span class="ln">95</span>    <span class="nx">Facebook</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">96</span>    <span class="nx">Telegram</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">97</span>    <span class="nx">Dribbble</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">98</span>    <span class="nx">Medium</span> <span class="p">=</span> <span class="s2">&#34;id&#34;</span>
+<span class="ln">99</span>    <span class="nx">Wechat</span> <span class="p">=</span> <span class="s2">&#34;wechat_qrcode_image.png&#34;</span>
+</code></pre></div><h2 id="原型模板">*原型模板</h2>
+<p><em><strong>Note:</strong> 这一步不是必须的，因为生成的每一篇文章都可以单独配置下面提到的 front matter。这里只是简单介绍，可以根据自己的需求修改，以减少重复工作、提升效率。</em></p>
+<h3 id="默认模板">默认模板</h3>
+<p>还记得前面说过的 <code>archetypes</code> 原型模板目录吧，这个目录下默认会创建一个 <code>default.md</code>，
+在 <a href="#%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0">新建文章</a> 的时候会将其作为原型自动为新的 Markdown 添加 
+<a href="https://gohugo.io/content-management/front-matter/">front matter</a>。</p>
+<p>在未更改 <code>default.md</code> 的情况下，新建的 Markdown 中仅会自动添加以下内容</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nn">---</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ replace .Name &#34;</span>-<span class="s2">&#34; &#34;</span><span class="w"> </span><span class="s2">&#34; | title }}&#34;</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span><span class="ln">4</span><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="ln">5</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span></code></pre></div><ul>
+<li>title: 文章标题。默认是从文件名替换而来</li>
+<li>date: 文章的创建日期。</li>
+<li>draft: 草稿标记。当设置为 <code>true</code> 时，Hugo 默认不会生成该文章的预览和 HTML。</li>
+</ul>
+<p>以本文举个例子，运行 <code>hugo new posts/Hugo-静态博客搭建.md</code> 后生成的 Markdown 内容将是</p>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nn">---</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Hugo 静态博客搭建&#34;</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2021-03-04T11:25:03</span><span class="m">+08</span><span class="p">:</span><span class="m">00</span><span class="w">
+</span><span class="ln">4</span><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="ln">5</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span></code></pre></div><p>上面两行 <code>---</code> 及其中间键值对形式的配置就是 <code>front matter</code> 了。</p>
+<h3 id="配置格式">配置格式</h3>
+<p>Hugo 支持的配置格式同样适用于 front matter，这里我们默认使用 <code>yaml</code>的格式。</p>
+<p>当然你也可以修改成自己习惯的格式：</p>
+<ul>
+<li><code>toml</code>：将两行 <code>---</code> 替换为 <code>+++</code>，并将中间的配置信息修改为 <code>toml</code> 格式。</li>
+<li><code>json</code>：将两行 <code>---</code> 分别替换为 <code>{</code> 和 <code>}</code>，并将中间的配置信息修改为 <code>json</code> 格式。</li>
+</ul>
+<h3 id="修改示例">修改示例</h3>
+<p>既然我们已经知道 front matter 是做什么的了，下面该按照自己的<del>xp</del>品味正式修改它了。</p>
+<p>一般，我们的博客一定会有两个页面： <code>tags</code> 和 <code>categories</code>。
+将文章标记到某个或某些 <code>tags</code> 和 <code>categories</code> 中，只需要在 front matter 中配置就好。</p>
+<p>以本文为例，
+下面是三种格式分别修改后的 <code>default.md</code> 以级对应生成的 Markdown 中写法的示例。</p>
+<h4 id="yaml">YAML</h4>
+<h5 id="defaultmd">default.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln">1</span><span class="nn">---</span><span class="w">
+</span><span class="ln">2</span><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ replace .Name &#34;</span>-<span class="s2">&#34; &#34;</span><span class="w"> </span><span class="s2">&#34; | title }}&#34;</span><span class="w">
+</span><span class="ln">3</span><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span>{{<span class="w"> </span><span class="l">.Date }}</span><span class="w">
+</span><span class="ln">4</span><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="hl"><span class="ln">5</span><span class="w"></span><span class="nt">tags</span><span class="p">:</span><span class="w"> 
+</span></span><span class="hl"><span class="ln">6</span><span class="w"></span><span class="nt">categories</span><span class="p">:</span><span class="w"> 
+</span></span><span class="ln">7</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span></code></pre></div><h5 id="hugo-静态博客搭建md">Hugo-静态博客搭建.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="ln"> 1</span><span class="nn">---</span><span class="w">
+</span><span class="ln"> 2</span><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Hugo 静态博客搭建&#34;</span><span class="w">
+</span><span class="ln"> 3</span><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2021-03-04T11:25:03</span><span class="m">+08</span><span class="p">:</span><span class="m">00</span><span class="w">
+</span><span class="ln"> 4</span><span class="w"></span><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="hl"><span class="ln"> 5</span><span class="w"></span><span class="nt">tags</span><span class="p">:</span><span class="w"> 
+</span></span><span class="hl"><span class="ln"> 6</span><span class="w">  </span>- <span class="s2">&#34;Hugo&#34;</span><span class="w">
+</span></span><span class="hl"><span class="ln"> 7</span><span class="w">  </span>- <span class="s2">&#34;静态博客&#34;</span><span class="w">
+</span></span><span class="hl"><span class="ln"> 8</span><span class="w">  </span>- <span class="s2">&#34;教程&#34;</span><span class="w">
+</span></span><span class="hl"><span class="ln"> 9</span><span class="w"></span><span class="nt">categories</span><span class="p">:</span><span class="w"> 
+</span></span><span class="hl"><span class="ln">10</span><span class="w">  </span>- <span class="s2">&#34;关于我想玩博客却不一定会玩博客还有可能把博客玩坏这件事&#34;</span><span class="w">
+</span></span><span class="ln">11</span><span class="w"></span><span class="nn">---</span><span class="w">
+</span></code></pre></div><h4 id="toml">TOML</h4>
+<h5 id="defaultmd-1">default.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="ln"> 1</span><span class="err">+++</span>
+<span class="ln"> 2</span><span class="nx">title</span><span class="p">=</span> <span class="s2">&#34;{{ replace .Name &#34;</span><span class="err">-</span><span class="s2">&#34; &#34;</span> <span class="s2">&#34; | title }}&#34;</span>
+<span class="ln"> 3</span><span class="nx">date</span><span class="p">=</span> <span class="p">{{</span> <span class="p">.</span><span class="nx">Date</span> <span class="p">}}</span>
+<span class="ln"> 4</span><span class="nx">draft</span><span class="p">=</span> <span class="kc">false</span>
+<span class="hl"><span class="ln"> 5</span><span class="nx">tags</span><span class="p">=</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 6</span>
+</span><span class="hl"><span class="ln"> 7</span><span class="p">]</span>
+</span><span class="hl"><span class="ln"> 8</span><span class="nx">categories</span><span class="p">=</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 9</span>
+</span><span class="hl"><span class="ln">10</span><span class="p">]</span>
+</span><span class="ln">11</span><span class="err">+++</span>
+</code></pre></div><h5 id="hugo-静态博客搭建md-1">Hugo-静态博客搭建.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-toml" data-lang="toml"><span class="ln"> 1</span><span class="err">+++</span>
+<span class="ln"> 2</span><span class="nx">title</span><span class="p">=</span> <span class="s2">&#34;Hugo 静态博客搭建&#34;</span>
+<span class="ln"> 3</span><span class="nx">date</span><span class="p">=</span> <span class="s2">&#34;2021-03-04T11:25:03+08:00&#34;</span>
+<span class="ln"> 4</span><span class="nx">draft</span><span class="p">=</span> <span class="kc">false</span>
+<span class="hl"><span class="ln"> 5</span><span class="nx">tags</span><span class="p">=</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 6</span>  <span class="s2">&#34;Hugo&#34;</span><span class="p">,</span>
+</span><span class="hl"><span class="ln"> 7</span>  <span class="s2">&#34;静态博客&#34;</span><span class="p">,</span>
+</span><span class="hl"><span class="ln"> 8</span>  <span class="s2">&#34;教程&#34;</span>
+</span><span class="hl"><span class="ln"> 9</span><span class="p">]</span>
+</span><span class="hl"><span class="ln">10</span><span class="nx">categories</span><span class="p">=</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln">11</span>  <span class="s2">&#34;关于我想玩博客却不一定会玩博客还有可能把博客玩坏这件事&#34;</span>
+</span><span class="hl"><span class="ln">12</span><span class="p">]</span>
+</span><span class="ln">13</span><span class="err">+++</span>
+</code></pre></div><h4 id="json">JSON</h4>
+<h5 id="defaultmd-2">default.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="p">{</span>
+<span class="ln"> 2</span>  <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;{{ replace .Name &#34;</span><span class="err">-</span><span class="s2">&#34; &#34;</span> <span class="s2">&#34; | title }}&#34;</span><span class="p">,</span>
+<span class="ln"> 3</span>  <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;{{ .Date }}&#34;</span><span class="p">,</span>
+<span class="ln"> 4</span>  <span class="nt">&#34;draft&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="hl"><span class="ln"> 5</span>  <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 6</span>
+</span><span class="hl"><span class="ln"> 7</span>  <span class="p">],</span>
+</span><span class="hl"><span class="ln"> 8</span>  <span class="nt">&#34;categories&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 9</span>
+</span><span class="hl"><span class="ln">10</span>  <span class="p">]</span>
+</span><span class="ln">11</span><span class="p">}</span>
+</code></pre></div><h5 id="hugo-静态博客搭建md-2">Hugo-静态博客搭建.md</h5>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="ln"> 1</span><span class="p">{</span>
+<span class="ln"> 2</span>  <span class="nt">&#34;title&#34;</span><span class="p">:</span> <span class="s2">&#34;Hugo 静态博客搭建&#34;</span><span class="p">,</span>
+<span class="ln"> 3</span>  <span class="nt">&#34;date&#34;</span><span class="p">:</span> <span class="s2">&#34;2021-03-04T11:25:03+08:00&#34;</span><span class="p">,</span>
+<span class="ln"> 4</span>  <span class="nt">&#34;draft&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="hl"><span class="ln"> 5</span>  <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln"> 6</span>      <span class="s2">&#34;Hugo&#34;</span><span class="p">,</span>
+</span><span class="hl"><span class="ln"> 7</span>      <span class="s2">&#34;静态博客&#34;</span><span class="p">,</span>
+</span><span class="hl"><span class="ln"> 8</span>      <span class="s2">&#34;教程&#34;</span>
+</span><span class="hl"><span class="ln"> 9</span>  <span class="p">],</span>
+</span><span class="hl"><span class="ln">10</span>  <span class="nt">&#34;categories&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class="hl"><span class="ln">11</span>      <span class="s2">&#34;关于我想玩博客却不一定会玩博客还有可能把博客玩坏这件事&#34;</span>
+</span><span class="hl"><span class="ln">12</span>  <span class="p">]</span>
+</span><span class="ln">13</span><span class="p">}</span>
+</code></pre></div><h4 id="几句废话">几句废话</h4>
+<p>此时你可能已经注意到了，这里 <code>tags</code> 和 <code>categories</code> 的写法和之前有些不同了。
+因为这两个配置是
+
+<a 
+
+  
+  
+    href="https://www.google.com/search?q=%e6%95%b0%e7%bb%84"
+   
+
+target="_blank"><i class="iconfont icon-search">数组</i></a>
+，所以以列举的形式出现了。</p>
+<p>另外，机灵的你也许还发现了 <code>default.md</code> 中的 <code>title</code> 出现了双引号内部嵌套双引号的现象，
+于是这里的代码高亮提示了语法错误。
+但是这里实际上不会报错，因为内部的双引号是在 Hugo 的表达式中，也就是 <code>{{</code> 和 <code>}}</code> 之间的。
+在生成 Markdown 时表达式将优先处理，所以最后只会剩下外层的两个双引号。
+<em><strong>Note:</strong> 实在有强迫症的话也许可以把内层或外层的引号换成单引号</em></p>
+<p>再另外，更机灵的你也许还意识到：这里配置的内容有点类似作用于每一篇文章内的局部变量，
+那么就可以更灵活地利用以实现某些更高级的特性，例如单独开关某篇文章的评论系统等。
+因为并不是必须的，这里就不再赘述了。</p>
+<h2 id="新建文章">新建文章</h2>
+<p>执行以下命令，新建一篇文章</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo new /posts/my-first-post.md
+</code></pre></div><p>上述命令将在 <code>content/posts/</code> 目录下新建一个 <code>my-first-post.md</code> 文件，
+生成的 <code>front matter</code> 由你的原型模板决定。</p>
+<h2 id="网站预览">网站预览</h2>
+<p>完成网站配置，也就是 <code>conig.toml</code> 的设置后，执行以下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo server
+</code></pre></div><p>上述命令将启动一个临时的 Hugo 服务器，打开浏览器访问 <a href="http://localhost:1313">http://localhost:1313</a> 即可看到你的博客了。</p>
+<h3 id="又是亿点点废话">又是亿点点废话</h3>
+<p>这里稍微展开一下，Hugo 既然也算是个 
+
+<a 
+
+  
+  
+    href="https://www.google.com/search?q=CLI"
+   
+
+target="_blank"><i class="iconfont icon-search">CLI</i></a>
+，那么应该也有命令帮助。
+我们试一下</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo --help
+</code></pre></div><p>予想通り、命令帮助被输出在画面上了<span class="spoiler">嘛，虽然我本来就知道了</span></p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln"> 1</span>hugo is the main command, used to build your Hugo site.
+<span class="ln"> 2</span>
+<span class="ln"> 3</span>Hugo is a Fast and Flexible Static Site Generator
+<span class="ln"> 4</span>built with love by spf13 and friends in Go.
+<span class="ln"> 5</span>
+<span class="ln"> 6</span>Complete documentation is available at http://gohugo.io/.
+<span class="ln"> 7</span>
+<span class="ln"> 8</span>Usage:
+<span class="ln"> 9</span>  hugo [flags]
+<span class="ln">10</span>  hugo [command]
+<span class="ln">11</span>
+<span class="ln">12</span>Available Commands:
+<span class="ln">13</span>  config      Print the site configuration
+<span class="ln">14</span>  convert     Convert your content to different formats
+<span class="ln">15</span>  deploy      Deploy your site to a Cloud provider.
+<span class="ln">16</span>  env         Print Hugo version and environment info
+<span class="ln">17</span>  gen         A collection of several useful generators.
+<span class="ln">18</span>  help        Help about any command
+<span class="ln">19</span>  import      Import your site from others.
+<span class="ln">20</span>  list        Listing out various types of content
+<span class="ln">21</span>  mod         Various Hugo Modules helpers.
+<span class="ln">22</span>  new         Create new content for your site
+<span class="ln">23</span>  server      A high performance webserver
+<span class="ln">24</span>  version     Print the version number of Hugo
+<span class="ln">25</span>
+<span class="ln">26</span>Flags:
+<span class="ln">27</span>  -b, --baseURL string             hostname (and path) to the root, e.g. http://spf13.com/
+<span class="ln">28</span>  -D, --buildDrafts                include content marked as draft
+<span class="ln">29</span>  -E, --buildExpired               include expired content
+<span class="ln">30</span>  -F, --buildFuture                include content with publishdate in the future
+<span class="ln">31</span>      --cacheDir string            filesystem path to cache directory. Defaults: $TMPDIR/hugo_cache/
+<span class="ln">32</span>      --cleanDestinationDir        remove files from destination not found in static directories
+<span class="ln">33</span>      --config string              config file (default is path/config.yaml|json|toml)
+<span class="ln">34</span>      --configDir string           config dir (default &#34;config&#34;)
+<span class="ln">35</span>  -c, --contentDir string          filesystem path to content directory
+<span class="ln">36</span>      --debug                      debug output
+<span class="ln">37</span>  -d, --destination string         filesystem path to write files to
+<span class="ln">38</span>      --disableKinds strings       disable different kind of pages (home, RSS etc.)
+<span class="ln">39</span>      --enableGitInfo              add Git revision, date and author info to the pages
+<span class="ln">40</span>  -e, --environment string         build environment
+<span class="ln">41</span>      --forceSyncStatic            copy all files when static is changed.
+<span class="ln">42</span>      --gc                         enable to run some cleanup tasks (remove unused cache files) after the build
+<span class="ln">43</span>  -h, --help                       help for hugo
+<span class="ln">44</span>      --i18n-warnings              print missing translations
+<span class="ln">45</span>      --ignoreCache                ignores the cache directory
+<span class="ln">46</span>      --ignoreVendor               ignores any _vendor directory
+<span class="ln">47</span>      --ignoreVendorPaths string   ignores any _vendor for module paths matching the given Glob pattern
+<span class="ln">48</span>  -l, --layoutDir string           filesystem path to layout directory
+<span class="ln">49</span>      --log                        enable Logging
+<span class="ln">50</span>      --logFile string             log File path (if set, logging enabled automatically)
+<span class="ln">51</span>      --minify                     minify any supported output format (HTML, XML etc.)
+<span class="ln">52</span>      --noChmod                    don&#39;t sync permission mode of files
+<span class="ln">53</span>      --noTimes                    don&#39;t sync modification time of files
+<span class="ln">54</span>      --path-warnings              print warnings on duplicate target paths etc.
+<span class="ln">55</span>      --print-mem                  print memory usage to screen at intervals
+<span class="ln">56</span>      --quiet                      build in quiet mode
+<span class="ln">57</span>      --renderToMemory             render to memory (only useful for benchmark testing)
+<span class="ln">58</span>  -s, --source string              filesystem path to read files relative from
+<span class="ln">59</span>      --templateMetrics            display metrics about template executions
+<span class="ln">60</span>      --templateMetricsHints       calculate some improvement hints when combined with --templateMetrics
+<span class="ln">61</span>  -t, --theme strings              themes to use (located in /themes/THEMENAME/)
+<span class="ln">62</span>      --themesDir string           filesystem path to themes directory
+<span class="ln">63</span>      --trace file                 write trace to file (not useful in general)
+<span class="ln">64</span>  -v, --verbose                    verbose output
+<span class="ln">65</span>      --verboseLog                 verbose logging
+<span class="ln">66</span>  -w, --watch                      watch filesystem for changes and recreate as needed
+<span class="ln">67</span>
+<span class="ln">68</span>Additional help topics:
+<span class="ln">69</span>  hugo check   Contains some verification checks
+<span class="ln">70</span>
+<span class="ln">71</span>Use &#34;hugo [command] --help&#34; for more information about a command.
+</code></pre></div><p>从事过前端开发的朋友可能已经猜到了些什么，既然我们需要预览，那怎么能少得了“自动重载”和“test环境”呢。
+大致找了找，Hugo 还真有那么几个 flag 的功能有点类似。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>  -D, --buildDrafts                include content marked as draft
+</code></pre></div><p>前面 “原型模板” 一章提到的 <code>draft</code> 就通过这个 flag 体现出效果了。</p>
+<p>如果启动 Hugo 预览时没有追加 <code>-D</code> 或者 <code>--buildDrafts</code>，
+Hugo 将不会为 front matter 中设置了 <code>draft: true</code> 的文章生成预览。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>  -w, --watch                      watch filesystem for changes and recreate as needed
+</code></pre></div><p>相比上一个，这个就更好用了。</p>
+<p>启动 Hugo 预览时追加 <code>-w</code> 或者 <code>--watch</code>，Hugo 服务器在运行中会实时监测你博客目录下的所有文件。</p>
+<p>一旦有文件发生变更，Hugo 便会及时将这些变更反映到当前运行的 Hugo 服务器中。</p>
+<p>（白话文：加了这个 flag，修改文件你只管写文章、保存、预览，一气呵成，不用手动重启 Hugo 就能做到）</p>
+<p>综上，以后运行博客预览只需执行以下命令即可</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo server -D -w
+</code></pre></div><p><em><strong>Note:</strong> 其他子命令和 flag 像 <code>config</code>、<code>--minify</code> 等，好玩的挺多的，只不过这些不是本文的重点，就不再过多讲解。</em></p>
+<h2 id="生成静态网站">生成静态网站</h2>
+<p>预览都 OK 了，就可以正式生成静态网站了，也就是各种 <code>.html</code>、<code>.css</code>、<code>.js</code> 之类的。
+执行以下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-cmd" data-lang="cmd"><span class="ln">1</span>hugo
+</code></pre></div><p>你的博客根目录 <code>blog</code> 下将会生成一个 <code>public</code> 目录，这里面就是你博客真正要发布的静态网站，
+之后就是 <code>Nginx</code>, <code>Apache</code>, <code>Caddy</code> 等静态网站中间件的工作了。</p>
+<p><em><strong>Note:</strong> 本站是使用 <code>GitHub Pages</code> 运行的，有机会的话，在以后的文章中再介绍</em></p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>niceRAM </span>
+            </p>
+            
+            
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://niceram.xyz/2021/03/04/20210304_1125/>https://niceram.xyz/2021/03/04/20210304_1125/</a>
+            </p>
+            
+            
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://niceram.xyz/tags/hugo/">
+                    #Hugo</a></span>
+            
+            <span class="tag"><a href="https://niceram.xyz/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/">
+                    #静态博客</a></span>
+            
+            <span class="tag"><a href="https://niceram.xyz/tags/%E6%95%99%E7%A8%8B/">
+                    #教程</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://niceram.xyz/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        
+    </div>
+
+    
+    <div class="post-social">
+        <div class="social-links">
+            
+<style type="text/css">
+@font-face {
+  font-family: 'iconfont';   
+  src: url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.eot');
+  src: url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1910062_4213q7gpkpy.svg#iconfont') format('svg');
+}
+</style>
+
+
+
+<a href="https://space.bilibili.com/10929768/channel/detail?cid=12977" target="_blank" rel="me noopener"><i class="iconfont icon-bilibili"></i></a>
+
+
+<a href="https://github.com/niceRAM" target="_blank" rel="me noopener"><i class="iconfont icon-github"></i></a>
+
+
+
+<a href="https://twitter.com/niceRAM95" target="_blank" rel="me noopener"><i class="iconfont icon-twitter"></i></a>
+
+ 
+
+<a href="mailto:niceniceram@gmail.com" rel="me noopener"><i class="iconfont icon-mail01"></i></a>
+
+
+
+<a href="https://t.me/niceRAM" target="_blank" rel="me noopener"><i class="iconfont icon-telegram"></i></a>
+
+
+
+
+        </div>
+    </div>
+    
+
+    <div class="post-comment">
+        
+            
+                <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.5.2/gitalk.css">
+<script src="https://cdn.bootcss.com/gitalk/1.5.2/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+
+        clientID: 'e2ac76297f1e7ec232f9',
+        clientSecret: '4385d32dd8c6ab5f97856bbe2e04a1e05a237276',
+        repo: 'blog-comments',
+        owner: 'niceRAM',
+        admin: ['niceRAM'],
+        proxy: 'https:\/\/cors-anywhere-niceblog.herokuapp.com\/https:\/\/github.com\/login\/oauth\/access_token',
+        id: location.pathname, 
+        distractionFreeMode: false 
+    });
+    (function () {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('gitalk-container').innerHTML = 'Gitalk comments not available by default when the website is previewed locally.';
+            return;
+        }
+        gitalk.render('gitalk-container');
+    })();
+</script>
+
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2021</span>
+        
+        <span class="rotating">🌸</span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://niceram.xyz/">niceRAM</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/niceRAM/nicesima" target="_blank" rel="external nofollow">nicesima</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+
+
+        </div>
+    </body>
+</html>
