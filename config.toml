@@ -59,7 +59,7 @@ pygmentsUseClasses = true # 使用自定义的代码高亮样式
 [params]
   since = "2018" # 站点建立时间
   author = "niceRAM" # 作者名字
-  avatar = ""
+  avatar = "https://avatars.githubusercontent.com/u/23020764?s=460&u=e484ebce04cd653b5610b25bc34551ab693b500d&v=4"
   subtitle = "The mountain of books has a road but I'm at a loss, and the sea of learning is unlimited so that I'm inundated." # 子标题
   description = "niceRAM's Blog" # (Meta) 描述
   license = '本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可'
