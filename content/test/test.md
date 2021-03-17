@@ -1,21 +1,16 @@
 ---
 title: "TEST"
 date: 1000-01-01
-showComments: true
+draft: false
 math: true
 plantuml: true
-enableGitalk: true
+
+# 以下默认使用全局配置，仅在需要单独设置当前文章的功能时取消注释
+# showComments: false
+# showPostSocialLinks: false
 ---
-<!-- 
-<img alt="shields" src="" style="float: left; margin: 5px 1em 0px 0px" >
-<img alt="" src="https://mogeko.github.io/blog-images/r/test/" >
-{{< spoiler >}}{{< /spoiler >}}
-&emsp;&emsp;
-```plaintext
- -->
 
 这是一个隐藏的页面，仅用于测试本博客的各项新特性。
-
 
 
 # Test 1
@@ -46,7 +41,7 @@ def _is_readable(socket):
 
 ## 测试组
 
-{{< spoiler >}} 隐藏文字 {{< /spoiler >}}
+{{< spoiler >}}隐藏文字{{< /spoiler >}}可见文字
 
 # Test 2
 
@@ -285,4 +280,5 @@ Alice <-- Bob: Another authentication Response
 
 # Test 6
 ## Embedded BiliBili video
+
 {{< bilibili BV1Nb411U7KP >}}
