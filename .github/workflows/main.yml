@@ -11,7 +11,7 @@ on:
     branches: [ blog ]
 
   # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch: true
+  workflow_dispatch: true
 
 env:
   GH_USERNAME: niceRAM
@@ -46,8 +46,8 @@ jobs:
           git config --global user.name "${GH_USERNAME}"
           git config --global user.email "${GH_EMAIL}"
           git add .
-          git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
           for try in $(seq 10); do
+            git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
             if git push "https://${{ secrets.DEPLOY_TOKEN }}@github.com/${GH_REPO}" master:${GH_BRANCH}; then
               exit 0
             else
