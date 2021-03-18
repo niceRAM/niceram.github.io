@@ -38,27 +38,36 @@ jobs:
         uses: jakejarvis/hugo-build-action@v0.81.0
         with:
           args: --minify
+          
+      - name: Commit
+        run: |
+          cd public
+          git config --global user.name "${GH_USERNAME}"
+          git config --global user.email "${GH_EMAIL}"
+          git add .
+          git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+      - name: Push
+        uses: ad-m/github-push-action@master
         with:
-          name: site
-          path: public
+          github_token: ${{ secrets.DEPLOY_TOKEN }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    container:
-      image: alpine/git
-    steps:
-    - name: Download Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: site
-        
-    - name: Tree
-      run: |
-        ll
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: site
+#          path: public
+
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-latest
+#    container:
+#      image: alpine/git
+#    steps:
+#    - name: Download Artifact
+#      uses: actions/download-artifact@v2
+#      with:
+#        name: site
         
 #    - name: Commit
 #      run: |
