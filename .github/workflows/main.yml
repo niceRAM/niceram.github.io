@@ -41,20 +41,13 @@ jobs:
           args: --minify
           
       - name: Deploy
-        run: |
-          cd public
-          git config --global user.name "${GH_USERNAME}"
-          git config --global user.email "${GH_EMAIL}"
-          git add .
-          for try in $(seq 10); do
-            git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
-            if git push "https://${{ secrets.DEPLOY_TOKEN }}@github.com/${GH_REPO}" master:${GH_BRANCH}; then
-              exit 0
-            else
-              sleep $(shuf -i 3-10 -n 1)
-            fi
-          done
-          exit 1
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+          commit_message: ${{ github.event.head_commit.message }}
+
 
 
 
