@@ -1,7 +1,7 @@
 [submodule "public"]
 	path = public
 	url = https://github.com/niceRAM/niceram.github.io.git
-	branch = renew
+	branch = master
 [submodule "themes/nicesima"]
 	path = themes/nicesima
 	url = https://github.com/niceRAM/nicesima.git
