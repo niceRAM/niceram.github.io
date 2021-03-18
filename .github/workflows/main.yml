@@ -60,6 +60,7 @@ jobs:
       run: |
         git config --global user.name "${GH_USERNAME}"
         git config --global user.email "${GH_EMAIL}"
+        ll
         git add .
         git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
         
