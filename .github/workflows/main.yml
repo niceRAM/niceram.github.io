@@ -16,7 +16,7 @@ on:
 env:
   GH_USENAME: niceRAM
   GH_EMAIL: niceniceram@gmail.com
-  GH_REPO: niceRAM/niceram.github.io
+  GH_REPO: github.com/niceRAM/niceram.github.io
   GH_BRANCH: master
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -66,7 +66,7 @@ jobs:
     - name: Push
       run: |
         for try in $(seq 10); do
-          if git push "https://${{ secrets.DEPLOY_TOKEN }}@github.com/${GH_REPO}" master:${GH_BRANCH}; then
+          if git push "https://${{ secrets.DEPLOY_TOKEN }}@${GH_REPO}" master:${GH_BRANCH}; then
             exit 0
           else
             sleep $(shuf -i 3-10 -n 1)
