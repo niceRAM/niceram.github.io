@@ -11,7 +11,7 @@ on:
     branches: [ blog ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch: true
+  workflow_dispatch:
 
 env:
   GH_USERNAME: niceRAM
@@ -40,7 +40,7 @@ jobs:
         with:
           args: --minify
           
-      - name: Commit
+      - name: Deploy
         run: |
           cd public
           git config --global user.name "${GH_USERNAME}"
