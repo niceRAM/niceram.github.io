@@ -56,15 +56,19 @@ jobs:
       with:
         name: site
         
-    - name: Commit
+    - name: Tree
       run: |
-        cd public
-        git config --global user.name "${GH_USERNAME}"
-        git config --global user.email "${GH_EMAIL}"
-        git add .
-        git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
+        tree
+        ll
         
-    - name: Push
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.DEPLOY_TOKEN }}
+#    - name: Commit
+#      run: |
+#        git config --global user.name "${GH_USERNAME}"
+#        git config --global user.email "${GH_EMAIL}"
+#        git add .
+#        git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
+#        
+#    - name: Push
+#      uses: ad-m/github-push-action@master
+#      with:
+#        github_token: ${{ secrets.DEPLOY_TOKEN }}
