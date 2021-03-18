@@ -18,6 +18,7 @@ env:
   GH_EMAIL: niceniceram@gmail.com
   GH_REPO: niceRAM/niceram.github.io
   GH_BRANCH: master
+  HUGO_PUBLISH_PATH: public
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -43,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: site
-          path: public
+          path: ${HUGO_PUBLISH_PATH}
 
   deploy:
     needs: build
@@ -58,9 +59,9 @@ jobs:
         
     - name: Commit
       run: |
+        cd "${HUGO_PUBLISH_PATH}"
         git config --global user.name "${GH_USERNAME}"
         git config --global user.email "${GH_EMAIL}"
-        ll
         git add .
         git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
         
