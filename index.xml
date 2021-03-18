@@ -1,52 +1,13 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>NiceBlog on NiceBlog</title>
-    <link>https://niceram.xyz/</link>
-    <description>Recent content in NiceBlog on NiceBlog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <lastBuildDate>Thu, 04 Mar 2021 11:25:03 +0800</lastBuildDate>
-    <atom:link href="https://niceram.xyz/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Posts</title>
-      <link>https://niceram.xyz/posts/</link>
-      <pubDate>Thu, 04 Mar 2021 11:25:03 +0800</pubDate>
-      
-      <guid>https://niceram.xyz/posts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://niceram.xyz/about/</link>
-      <pubDate>Wed, 15 Aug 2018 14:34:16 +0800</pubDate>
-      
-      <guid>https://niceram.xyz/about/</guid>
-      <description>&lt;h2 id=&#34;关于本站&#34;&gt;🏡关于本站&lt;/h2&gt;
-&lt;p&gt;&lt;del&gt;2018年建站，至今还没有文章，是博客中的假站……&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;2018年建站&lt;del&gt;未遂&lt;/del&gt;……&lt;/p&gt;
-&lt;p&gt;直到2021年重建。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;h2 id=&#34;关于博主&#34;&gt;🐶关于博主&lt;/h2&gt;
-&lt;p&gt;&lt;del&gt;自2017年毕业以来一直 &lt;del&gt;沉迷游戏&lt;/del&gt; 忙于工作，至今还未写过文章，是博主中的假主……&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;没事爱瞎折腾，&lt;span class=&#34;spoiler&#34;&gt;但不一定有用&lt;/span&gt;🙄&lt;/p&gt;
-&lt;p&gt;闲着打打游戏，&lt;span class=&#34;spoiler&#34;&gt;但不一定打得好&lt;/span&gt;😅&lt;/p&gt;
-&lt;p&gt;想到一个点子就一头扎进去，&lt;span class=&#34;spoiler&#34;&gt;甚至有可能淹死&lt;/span&gt;😨&lt;/p&gt;
-&lt;p&gt;……まぁ、楽しく生きていていいだろう～&lt;/p&gt;
-&lt;h2 id=&#34;邮箱-niceniceramgmailcommailtoniceniceramgmailcom&#34;&gt;📫邮箱: &lt;a href=&#34;mailto:niceniceram@gmail.com&#34;&gt;niceniceram@gmail.com&lt;/a&gt;&lt;/h2&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Tests</title>
-      <link>https://niceram.xyz/test/</link>
-      <pubDate>Wed, 01 Jan 1000 00:00:00 +0000</pubDate>
-      
-      <guid>https://niceram.xyz/test/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NiceBlog on NiceBlog</title><link>https://niceram.xyz/</link><description>Recent content in NiceBlog on NiceBlog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 04 Mar 2021 11:25:03 +0800</lastBuildDate><atom:link href="https://niceram.xyz/" rel="self" type="application/rss+xml"/><item><title>Posts</title><link>https://niceram.xyz/posts/</link><pubDate>Thu, 04 Mar 2021 11:25:03 +0800</pubDate><guid>https://niceram.xyz/posts/</guid><description/></item><item><title>About</title><link>https://niceram.xyz/about/</link><pubDate>Wed, 15 Aug 2018 14:34:16 +0800</pubDate><guid>https://niceram.xyz/about/</guid><description>&lt;h2 id="关于本站">🏡关于本站&lt;/h2>
+&lt;p>&lt;del>2018年建站，至今还没有文章，是博客中的假站……&lt;/del>&lt;/p>
+&lt;p>2018年建站&lt;del>未遂&lt;/del>……&lt;/p>
+&lt;p>直到2021年重建。&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted -->
+&lt;h2 id="关于博主">🐶关于博主&lt;/h2>
+&lt;p>&lt;del>自2017年毕业以来一直 &lt;del>沉迷游戏&lt;/del> 忙于工作，至今还未写过文章，是博主中的假主……&lt;/del>&lt;/p>
+&lt;p>没事爱瞎折腾，&lt;span class="spoiler">但不一定有用&lt;/span>🙄&lt;/p>
+&lt;p>闲着打打游戏，&lt;span class="spoiler">但不一定打得好&lt;/span>😅&lt;/p>
+&lt;p>想到一个点子就一头扎进去，&lt;span class="spoiler">甚至有可能淹死&lt;/span>😨&lt;/p>
+&lt;p>……まぁ、楽しく生きていていいだろう～&lt;/p>
+&lt;h2 id="邮箱-niceniceramgmailcommailtoniceniceramgmailcom">📫邮箱: &lt;a href="mailto:niceniceram@gmail.com">niceniceram@gmail.com&lt;/a>&lt;/h2></description></item><item><title>Tests</title><link>https://niceram.xyz/test/</link><pubDate>Wed, 01 Jan 1000 00:00:00 +0000</pubDate><guid>https://niceram.xyz/test/</guid><description/></item></channel></rss>
