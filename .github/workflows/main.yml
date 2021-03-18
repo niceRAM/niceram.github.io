@@ -58,7 +58,6 @@ jobs:
         
     - name: Tree
       run: |
-        tree
         ll
         
 #    - name: Commit
