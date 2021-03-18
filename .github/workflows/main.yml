@@ -64,12 +64,6 @@ jobs:
         git commit -m "Built By GitHub Actions on $(date "+%Y-%m-%d %T")"
         
     - name: Push
-      run: |
-        for try in $(seq 10); do
-          if git push "https://${{ secrets.DEPLOY_TOKEN }}@github.com/${GH_REPO}" master:${GH_BRANCH}; then
-            exit 0
-          else
-            sleep $(shuf -i 3-10 -n 1)
-          fi
-        done
-        exit 1
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.DEPLOY_TOKEN }}
