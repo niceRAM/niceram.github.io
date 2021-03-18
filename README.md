@@ -1,12 +1,13 @@
 # niceBlog
 
+[![NiceBlog](https://github.com/niceRAM/niceram.github.io/actions/workflows/main.yml/badge.svg?branch=blog)](https://github.com/niceRAM/niceram.github.io/actions/workflows/main.yml)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
 [![Hugo](https://img.shields.io/badge/Power%20by-Hugo-%23ff4088)](https://gohugo.io/)
 [![theme](https://img.shields.io/badge/Theme-nicesima-blueviolet)](https://github.com/niceRAM/mogege)
 
 这是 niceRAM 的个人博客，地址：**<https://niceram.xyz>**
 
-使用 Markdown 书写，用 [Hugo](https://gohugo.io/) 生成静态网页。
+使用 Markdown 书写，用 [Hugo](https://gohugo.io/) 生成静态网页，用 GitHub Actions + GitHub Pages 自动部署。
 
 主题使用的是 [nicesima](https://github.com/niceRAM/nicesima)
 
