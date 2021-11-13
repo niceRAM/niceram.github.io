@@ -1,0 +1,1 @@
+hugo server --buildDrafts -w --bind 0.0.0.0
