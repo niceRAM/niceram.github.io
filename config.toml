@@ -96,5 +96,5 @@ pygmentsUseClasses = true # 使用自定义的代码高亮样式
     GitHub = "niceRAM"
     Twitter = "niceRAM95"
     Email = "niceniceram@gmail.com"
-    Telegram = "niceRAM"
+    # Telegram = "niceRAM"
     Bilibili = "10929768/channel/detail?cid=12977"
