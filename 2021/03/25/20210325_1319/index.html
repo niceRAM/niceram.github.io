@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/03/22/20210322_1451/><link rel=next href=https://niceram.xyz/2021/04/15/20210415_2157/><link rel=canonical href=https://niceram.xyz/2021/03/25/20210325_1319/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages | NiceBlog</title><meta name=title content="使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages","headline":"使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages","description":"使用 GitHub Pages 可以很方便的将静态网站部署到公网，Hugo 生成的静态博客也同样适用。 不过，每次都手动将网站代码 push 到运行 GitHub Pages 的仓库，虽然操作不麻烦但未","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-03-25 13:19:07 \u002b0800 \u002b0800","dateModified":"2021-03-25 13:19:07 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/03\/25\/20210325_1319\/","wordCount":"1758","keywords":["GitHub Actions","workflow","CI","静态网站","GitHub Pages","Hugo","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/03/22/20210322_1451/><link rel=next href=https://niceram.xyz/2021/04/15/20210415_2157/><link rel=canonical href=https://niceram.xyz/2021/03/25/20210325_1319/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages | NiceBlog</title><meta name=title content="使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages","headline":"使用 GitHub Actions 自动构建·部署静态网站到 GitHub Pages","description":"使用 GitHub Pages 可以很方便的将静态网站部署到公网，Hugo 生成的静态博客也同样适用。 不过，每次都手动将网站代码 push 到运行 GitHub Pages 的仓库，虽然操作不麻烦但未","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-03-25 13:19:07 \u002b0800 \u002b0800","dateModified":"2021-03-25 13:19:07 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/03\/25\/20210325_1319\/","wordCount":"1771","keywords":["GitHub Actions","workflow","CI","静态网站","GitHub Pages","Hugo","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
 <a href=https://niceram.xyz/><span class=logo_text>cd /home/</span>
 <span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/ title>📚Blog</a>
 <a class=menu-item href=/categories/ title>📂Categories</a>
@@ -8,7 +8,7 @@
 <span class=post-time>on <time datetime=2021-03-25 itemprop=datePublished>March 25, 2021</time></span>
 in
 <i class="iconfont icon-folder"></i><span class=post-category><a href=https://niceram.xyz/categories/%E5%85%B3%E4%BA%8E%E6%88%91%E6%83%B3%E7%8E%A9%E5%8D%B4%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%BC%9A%E7%8E%A9%E8%BF%98%E6%9C%89%E5%8F%AF%E8%83%BD%E7%8E%A9%E5%9D%8F%E5%8D%9A%E5%AE%A2%E8%BF%99%E4%BB%B6%E4%BA%8B/>关于我想玩却不一定会玩还有可能玩坏博客这件事,</a></span>
-<span class=post-word-count>1758 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#事前准备>事前准备</a><ul><li><a href=#确定博客源码的获取源>确定博客源码的获取源</a></li><li><a href=#确定构建时机>确定构建时机</a></li><li><a href=#创建-personal-access-tokens>创建 Personal access tokens</a></li></ul></li><li><a href=#新建-workflow>新建 workflow</a><ul><li><a href=#通过-github-网页>通过 GitHub 网页</a></li><li><a href=#通过本地手动创建>通过本地手动创建</a></li></ul></li><li><a href=#编写配置文件>编写配置文件</a></li><li><a href=#测试-workflow>测试 workflow</a></li></ul></nav></div></div><div class=post-content><p>使用 GitHub Pages 可以很方便的将静态网站部署到公网，Hugo 生成的静态博客也同样适用。
+<span class=post-word-count>1771 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#事前准备>事前准备</a><ul><li><a href=#确定博客源码的获取源>确定博客源码的获取源</a></li><li><a href=#确定构建时机>确定构建时机</a></li><li><a href=#创建-personal-access-tokens>创建 Personal access tokens</a></li></ul></li><li><a href=#新建-workflow>新建 workflow</a><ul><li><a href=#通过-github-网页>通过 GitHub 网页</a></li><li><a href=#通过本地手动创建>通过本地手动创建</a></li></ul></li><li><a href=#编写配置文件>编写配置文件</a></li><li><a href=#测试-workflow>测试 workflow</a></li></ul></nav></div></div><div class=post-content><p>使用 GitHub Pages 可以很方便的将静态网站部署到公网，Hugo 生成的静态博客也同样适用。
 不过，每次都手动将网站代码 push 到运行 GitHub Pages 的仓库，虽然操作不麻烦但未免也太重复枯燥，
 而通过 GitHub Actions 可以有效减少重复工作，提高工作效率。</p><hr><h2 id=事前准备>事前准备</h2><p>首先，明确我们的自动化逻辑：</p><h3 id=确定博客源码的获取源>确定博客源码的获取源</h3><p>首先要让 GitHub Actions 能够获取博客源码，也就是 Markdown 文件，通常用 GitHub 仓库即可。</p><p>另外，有的博主也许并不想直接或间接地暴露 Markdown 源文件……
 虽然没尝试太多，理论上，获取源也可以是其他平台的代码仓库，甚至是自己的 SFTP 服务器。
@@ -19,74 +19,141 @@ in
 然后勾选 <code>workflow</code> 和 <code>admin:repo_hook</code>，勾选 <code>workflow</code> 会强制勾选 <code>repo</code>，
 所以最终创建的 token 将拥有 <code>repo</code>, <code>workflow</code> 和 <code>admin:repo_hook</code> 权限。</p><p><img src=https://cdn.jsdelivr.net/gh/niceRAM/blog-images/img/20210325_1319/2021/03/25/16-36-57-274-48ddda.png alt></p><h2 id=新建-workflow>新建 workflow</h2><p><em><strong>Note:</strong> 至于为什么这里名字变成了 workflow，我也不是很明白。</em></p><p><em>个人理解是： <code>GitHub Actions</code> 只是 GitHub 提供的这个功能的名字；
 这个功能中真正配置、运行的东西叫做 workflow(工作流)；
-而每个 workflow 中运行的就是经常听到的 job。</em></p><p><em>感觉有点像 activity 或者说是 BPMN 项目的意思。</em></p><h3 id=通过-github-网页>通过 GitHub 网页</h3><p>在 GitHub 仓库页选择 Actions 标签，点击 <code>set up a workflow yourself</code> 新建 workflow。</p><p><img src=https://cdn.jsdelivr.net/gh/niceRAM/blog-images/img/20210325_1319/2021/03/25/14-53-45-111-2d2f4c.png alt></p><h3 id=通过本地手动创建>通过本地手动创建</h3><p>workflow 其实是在当前仓库当前分支下创建 <code>.github/workflows/</code> 目录，在该目录下创建 <code>.yml</code> 文件，每个 <code>.yml</code> 文件就是一个 workflow 的配置文件。</p><p>Windows 不能直接创建 <code>.</code> 开头的目录/文件，可以参考以下命令：</p><div class=highlight><pre class=chroma><code class=language-cmd data-lang=cmd><span class=ln>1</span><span class=k>cd</span> <span class=s2>&#34;&lt;path_to_blog&gt;&#34;</span>
-<span class=ln>2</span><span class=k>mkdir</span> <span class=s2>&#34;.github\workflows&#34;</span>
-<span class=ln>3</span><span class=k>echo</span> <span class=s2>&#34;&#34;</span> <span class=p>&gt;</span> <span class=s2>&#34;.github\workflows\main.yml&#34;</span>
-</code></pre></div><h2 id=编写配置文件>编写配置文件</h2><p>以下是根据我的仓库整理的配置文件，可以按需要修改。</p><p><strong>Note:</strong></p><ul><li>master 分支运行着 GitHub Pages</li><li>blog 分支存放着 markdown 文件</li><li>blog 分支的 <code>themes/nicesima</code> 目录是 submodule，链接到 <code>niceRAM/nicesima</code> 这个仓库。</li></ul><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=ln> 1</span><span class=c># workflow 的名字</span><span class=w>
-</span><span class=ln> 2</span><span class=w></span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Blog Build</span><span class=w>
-</span><span class=ln> 3</span><span class=w>
-</span><span class=ln> 4</span><span class=w></span><span class=c># 触发 workflow 运行的事件</span><span class=w>
-</span><span class=ln> 5</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
-</span><span class=ln> 6</span><span class=w>  </span><span class=c># 执行 push 时触发</span><span class=w>
-</span><span class=ln> 7</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
-</span><span class=ln> 8</span><span class=w>    </span><span class=c># 指定当 blog 分支被 push 时才触发。可以指定多个分支，可以省略，默认为 master</span><span class=w>
-</span><span class=ln> 9</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>blog ]</span><span class=w>
-</span><span class=ln>10</span><span class=w>  </span><span class=c># 执行 pull_request 时触发</span><span class=w>
-</span><span class=ln>11</span><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
-</span><span class=ln>12</span><span class=w>    </span><span class=c># 指定当 blog 分支执行 pull_request 时才触发。可以指定多个分支，可以省略，默认为 master</span><span class=w>
-</span><span class=ln>13</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>blog ]</span><span class=w>
-</span><span class=ln>14</span><span class=w>
-</span><span class=ln>15</span><span class=w>  </span><span class=c># 看原注释的意思，如果存在 workflow_dispatch，当前 workflow 允许被手动执行。</span><span class=w>
-</span><span class=ln>16</span><span class=w>  </span><span class=c># 但是我尝试的时候，如果存在这个设置，上面配置的事件将不会被触发，也就是只能手动执行。</span><span class=w>
-</span><span class=ln>17</span><span class=w>  </span><span class=c># workflow_dispatch:</span><span class=w>
-</span><span class=ln>18</span><span class=w>
-</span><span class=ln>19</span><span class=w></span><span class=c># 环境变量</span><span class=w>
-</span><span class=ln>20</span><span class=w></span><span class=nt>env</span><span class=p>:</span><span class=w>
-</span><span class=ln>21</span><span class=w>  </span><span class=c># GitHub 用户名</span><span class=w>
-</span><span class=ln>22</span><span class=w>  </span><span class=nt>GH_USERNAME</span><span class=p>:</span><span class=w> </span><span class=l>your_github_id</span><span class=w>
-</span><span class=ln>23</span><span class=w>  </span><span class=c># commit 时使用的 Email</span><span class=w>
-</span><span class=ln>24</span><span class=w>  </span><span class=nt>GH_EMAIL</span><span class=p>:</span><span class=w> </span><span class=l>your_email@email-server.com</span><span class=w>
-</span><span class=ln>25</span><span class=w>  </span><span class=c># 部署 GitHub Pages 的仓库，格式：用户名/仓库名</span><span class=w>
-</span><span class=ln>26</span><span class=w>  </span><span class=nt>GH_REPO</span><span class=p>:</span><span class=w> </span><span class=l>your_github_id/your_markdown_github_repo</span><span class=w>
-</span><span class=ln>27</span><span class=w>  </span><span class=c># 部署 GitHub Pages 的仓库的分支名</span><span class=w>
-</span><span class=ln>28</span><span class=w>  </span><span class=nt>GH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
-</span><span class=ln>29</span><span class=w>  
-</span><span class=ln>30</span><span class=w></span><span class=c># 一个 workflow 由至少一个 job 组成</span><span class=w>
-</span><span class=ln>31</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span><span class=ln>32</span><span class=w>  </span><span class=c># jobs 的第一个子项是 job 的名字  </span><span class=w>
-</span><span class=ln>33</span><span class=w>  </span><span class=nt>build-deploy</span><span class=p>:</span><span class=w>
-</span><span class=ln>34</span><span class=w>    </span><span class=c># 该 job 的容器环境    </span><span class=w>
-</span><span class=ln>35</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
-</span><span class=ln>36</span><span class=w>
-</span><span class=ln>37</span><span class=w>    </span><span class=c># 一个 job 由至少一个 step 组成，每个 step 以数组的形式依次编写    </span><span class=w>
-</span><span class=ln>38</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
-</span><span class=ln>39</span><span class=w>      </span><span class=c># 拉取 markdown，也就是当前仓库的源码</span><span class=w>
-</span><span class=ln>40</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
-</span><span class=ln>41</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=ln>42</span><span class=w>          </span><span class=c># markdown 所在分支是 blog</span><span class=w>
-</span><span class=ln>43</span><span class=w>          </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>blog</span><span class=w>
-</span><span class=ln>44</span><span class=w>          </span><span class=c># 同时拉取 submodule，因为要用到对应的主题</span><span class=w>
-</span><span class=ln>45</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
-</span><span class=ln>46</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
-</span><span class=ln>47</span><span class=w>
-</span><span class=ln>48</span><span class=w>      </span><span class=c># 引用 jakejarvis/hugo-build-action 构建网站代码</span><span class=w>
-</span><span class=ln>49</span><span class=w>      </span><span class=c># 当然也可以用其他的 Actions 甚至可以自己写，只是用法有点区别而已，思路都大同小异</span><span class=w>
-</span><span class=ln>50</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hugo Build</span><span class=w>
-</span><span class=ln>51</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>jakejarvis/hugo-build-action@v0.81.0</span><span class=w>
-</span><span class=ln>52</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=ln>53</span><span class=w>          </span><span class=nt>args</span><span class=p>:</span><span class=w> </span>--<span class=l>minify</span><span class=w>
-</span><span class=ln>54</span><span class=w>          
-</span><span class=ln>55</span><span class=w>      </span><span class=c># 引用 peaceiris/actions-gh-pages 将网站代码 commit 并 push 到 GitHub Pages 仓库</span><span class=w>
-</span><span class=ln>56</span><span class=w>      </span><span class=c># 同上，也可以用其他的 Actions，也可以全部自己写。</span><span class=w>
-</span><span class=ln>57</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
-</span><span class=ln>58</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
-</span><span class=ln>59</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=ln>60</span><span class=w>          </span><span class=c># 指定前面准备的 token</span><span class=w>
-</span><span class=ln>61</span><span class=w>          </span><span class=nt>personal_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.BLOG_DEPLOY_TOKEN }}</span><span class=w>
-</span><span class=ln>62</span><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
-</span><span class=ln>63</span><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
-</span><span class=ln>64</span><span class=w>          </span><span class=nt>commit_message</span><span class=p>:</span><span class=w> </span><span class=l>${{ github.event.head_commit.message }}</span><span class=w>
-</span></code></pre></div><p>至此 workflow 就编写完成了，如果是在网页端编写，最后别忘记点 <code>Start commit</code> 保存配置文件。</p><p>主要操作基本都在 steps 里，详细可以参考 <a href=https://docs.github.com/articles/configuring-workflows>官方文档</a>。
+而每个 workflow 中运行的就是经常听到的 job。</em></p><p><em>感觉有点像 activity 或者说是 BPMN 项目的意思。</em></p><h3 id=通过-github-网页>通过 GitHub 网页</h3><p>在 GitHub 仓库页选择 Actions 标签，点击 <code>set up a workflow yourself</code> 新建 workflow。</p><p><img src=https://cdn.jsdelivr.net/gh/niceRAM/blog-images/img/20210325_1319/2021/03/25/14-53-45-111-2d2f4c.png alt></p><h3 id=通过本地手动创建>通过本地手动创建</h3><p>workflow 其实是在当前仓库当前分支下创建 <code>.github/workflows/</code> 目录，在该目录下创建 <code>.yml</code> 文件，每个 <code>.yml</code> 文件就是一个 workflow 的配置文件。</p><p>Windows 不能直接创建 <code>.</code> 开头的目录/文件，可以参考以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-cmd data-lang=cmd><span class=k>cd</span> <span class=s2>&#34;&lt;path_to_blog&gt;&#34;</span>
+<span class=k>mkdir</span> <span class=s2>&#34;.github\workflows&#34;</span>
+<span class=k>echo</span> <span class=s2>&#34;&#34;</span> <span class=p>&gt;</span> <span class=s2>&#34;.github\workflows\main.yml&#34;</span>
+</code></pre></td></tr></table></div></div><h2 id=编写配置文件>编写配置文件</h2><p>以下是根据我的仓库整理的配置文件，可以按需要修改。</p><p><strong>Note:</strong></p><ul><li>master 分支运行着 GitHub Pages</li><li>blog 分支存放着 markdown 文件</li><li>blog 分支的 <code>themes/nicesima</code> 目录是 submodule，链接到 <code>niceRAM/nicesima</code> 这个仓库。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=c># workflow 的名字</span><span class=w>
+</span><span class=w></span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Blog Build</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 触发 workflow 运行的事件</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># 执行 push 时触发</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># 指定当 blog 分支被 push 时才触发。可以指定多个分支，可以省略，默认为 master</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>blog ]</span><span class=w>
+</span><span class=w>  </span><span class=c># 执行 pull_request 时触发</span><span class=w>
+</span><span class=w>  </span><span class=nt>pull_request</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># 指定当 blog 分支执行 pull_request 时才触发。可以指定多个分支，可以省略，默认为 master</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=w> </span><span class=l>blog ]</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 看原注释的意思，如果存在 workflow_dispatch，当前 workflow 允许被手动执行。</span><span class=w>
+</span><span class=w>  </span><span class=c># 但是我尝试的时候，如果存在这个设置，上面配置的事件将不会被触发，也就是只能手动执行。</span><span class=w>
+</span><span class=w>  </span><span class=c># workflow_dispatch:</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 环境变量</span><span class=w>
+</span><span class=w></span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># GitHub 用户名</span><span class=w>
+</span><span class=w>  </span><span class=nt>GH_USERNAME</span><span class=p>:</span><span class=w> </span><span class=l>your_github_id</span><span class=w>
+</span><span class=w>  </span><span class=c># commit 时使用的 Email</span><span class=w>
+</span><span class=w>  </span><span class=nt>GH_EMAIL</span><span class=p>:</span><span class=w> </span><span class=l>your_email@email-server.com</span><span class=w>
+</span><span class=w>  </span><span class=c># 部署 GitHub Pages 的仓库，格式：用户名/仓库名</span><span class=w>
+</span><span class=w>  </span><span class=nt>GH_REPO</span><span class=p>:</span><span class=w> </span><span class=l>your_github_id/your_markdown_github_repo</span><span class=w>
+</span><span class=w>  </span><span class=c># 部署 GitHub Pages 的仓库的分支名</span><span class=w>
+</span><span class=w>  </span><span class=nt>GH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>  
+</span><span class=w></span><span class=c># 一个 workflow 由至少一个 job 组成</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=c># jobs 的第一个子项是 job 的名字  </span><span class=w>
+</span><span class=w>  </span><span class=nt>build-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># 该 job 的容器环境    </span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=c># 一个 job 由至少一个 step 组成，每个 step 以数组的形式依次编写    </span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># 拉取 markdown，也就是当前仓库的源码</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># markdown 所在分支是 blog</span><span class=w>
+</span><span class=w>          </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>blog</span><span class=w>
+</span><span class=w>          </span><span class=c># 同时拉取 submodule，因为要用到对应的主题</span><span class=w>
+</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 引用 jakejarvis/hugo-build-action 构建网站代码</span><span class=w>
+</span><span class=w>      </span><span class=c># 当然也可以用其他的 Actions 甚至可以自己写，只是用法有点区别而已，思路都大同小异</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hugo Build</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>jakejarvis/hugo-build-action@v0.81.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>args</span><span class=p>:</span><span class=w> </span>--<span class=l>minify</span><span class=w>
+</span><span class=w>          
+</span><span class=w>      </span><span class=c># 引用 peaceiris/actions-gh-pages 将网站代码 commit 并 push 到 GitHub Pages 仓库</span><span class=w>
+</span><span class=w>      </span><span class=c># 同上，也可以用其他的 Actions，也可以全部自己写。</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 指定前面准备的 token</span><span class=w>
+</span><span class=w>          </span><span class=nt>personal_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.BLOG_DEPLOY_TOKEN }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span><span class=w>          </span><span class=nt>commit_message</span><span class=p>:</span><span class=w> </span><span class=l>${{ github.event.head_commit.message }}</span><span class=w>
+</span></code></pre></td></tr></table></div></div><p>至此 workflow 就编写完成了，如果是在网页端编写，最后别忘记点 <code>Start commit</code> 保存配置文件。</p><p>主要操作基本都在 steps 里，详细可以参考 <a href=https://docs.github.com/articles/configuring-workflows>官方文档</a>。
 在网页端编写时还可以在右侧的 Marketplace 随时搜索需要的 workflow。</p><h2 id=测试-workflow>测试 workflow</h2><p>上传一篇文章或随便做点更新并 push，现在打开刚才的 Actions 标签，不出意外就可以看到 <code>workflow runs</code>，
 也就是 workflow 的运行记录。</p><p>如果 workflow 运行出错，GitHub 还会发邮件通知，所有 runs 都可以查看完整日志和 workflow 配置文件，
 对问题定位有很大帮助。</p><div class=post-rel><h2 id=相关文章>相关文章</h2><ul><li><a href=https://niceram.xyz/2021/03/04/20210304_1125/>Hugo 静态博客食用指南</a></li><li><a href=https://niceram.xyz/2021/03/22/20210322_1451/>使用 GitHub Pages 部署静态博客</a></li></ul></div><div class=post-ref><h2 id=参考链接>参考链接</h2><ul><li><a href=https://docs.github.com/en/actions/learn-github-actions>Learn GitHub Actions - GitHub Docs</a></li><li><a href=https://github.com/marketplace/actions/checkout>Checkout · Actions · GitHub Marketplace</a></li><li><a href=https://github.com/marketplace/actions/hugo-build>Hugo Build · Actions · GitHub Marketplace</a></li><li><a href=https://github.com/marketplace/actions/github-pages-action>GitHub Pages action · Actions · GitHub Marketplace</a></li></ul></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>

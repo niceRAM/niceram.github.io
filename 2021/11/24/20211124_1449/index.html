@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/11/23/20211123_1648/><link rel=next href=https://niceram.xyz/2021/11/26/20211126_1424/><link rel=canonical href=https://niceram.xyz/2021/11/24/20211124_1449/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c | NiceBlog</title><meta name=title content="[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c","headline":"[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c","description":"上一次用 Oracle 还是 11g ，最近用的 19C 相比变化还不小，甚至连创建用户都超出我的已有知识范围。 问题 登入数据库，用 CREATE USER 创建用户，提示 ORA-65096: invalid common user or role name。","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-11-24 14:49:30 \u002b0800 \u002b0800","dateModified":"2021-11-24 14:49:30 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/11\/24\/20211124_1449\/","wordCount":"671","keywords":["Oracle","Database","DB","数据库","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/11/23/20211123_1648/><link rel=next href=https://niceram.xyz/2021/11/26/20211126_1424/><link rel=canonical href=https://niceram.xyz/2021/11/24/20211124_1449/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c | NiceBlog</title><meta name=title content="[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c","headline":"[ORA-65096: invalid common user or role name] when `CREATE USER` via Oracle19c","description":"上一次用 Oracle 还是 11g ，最近用的 19C 相比变化还不小，甚至连创建用户都超出我的已有知识范围。 问题 登入数据库，用 CREATE USER 创建用户，提示 ORA-65096: invalid common user or role name。","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-11-24 14:49:30 \u002b0800 \u002b0800","dateModified":"2021-11-24 14:49:30 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/11\/24\/20211124_1449\/","wordCount":"707","keywords":["Oracle","Database","DB","数据库","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
 <a href=https://niceram.xyz/><span class=logo_text>cd /home/</span>
 <span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/ title>📚Blog</a>
 <a class=menu-item href=/categories/ title>📂Categories</a>
@@ -8,60 +8,113 @@
 <span class=post-time>on <time datetime=2021-11-24 itemprop=datePublished>November 24, 2021</time></span>
 in
 <i class="iconfont icon-folder"></i><span class=post-category><a href=https://niceram.xyz/categories/%E5%A5%BD%E8%AE%B0%E6%80%A7%E4%B8%8D%E5%A6%82%E4%BA%91%E7%AC%94%E8%AE%B0/>好记性不如云笔记,</a></span>
-<span class=post-word-count>671 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#问题>问题</a></li><li><a href=#原因>原因</a></li><li><a href=#对策>对策</a><ul><li><a href=#修正用户名>修正用户名</a></li><li><a href=#切换至-pdb>切换至 PDB</a></li></ul></li><li><a href=#可能存在的坑>可能存在的坑</a></li></ul></nav></div></div><div class=post-content><p>上一次用 Oracle 还是 11g ，最近用的 19C 相比变化还不小，甚至连创建用户都超出我的已有知识范围。</p><hr><h2 id=问题>问题</h2><p>登入数据库，用 <code>CREATE USER</code> 创建用户，提示 <code>ORA-65096: invalid common user or role name</code>。</p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=ln> 1</span><span class=p>[</span><span class=n>oracle</span><span class=o>@</span><span class=n>Oracle19c</span> <span class=o>~</span><span class=p>]</span><span class=err>$</span> <span class=n>sqlplus</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span><span class=k>SQL</span><span class=o>*</span><span class=n>Plus</span><span class=p>:</span> <span class=n>Release</span> <span class=mi>19</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span> <span class=o>-</span> <span class=n>Production</span> <span class=k>on</span> <span class=n>Tue</span> <span class=n>Nov</span> <span class=mi>23</span> <span class=mi>09</span><span class=p>:</span><span class=mi>24</span><span class=p>:</span><span class=mi>46</span> <span class=mi>2021</span>
-<span class=ln> 4</span><span class=k>Version</span> <span class=mi>19</span><span class=p>.</span><span class=mi>3</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span>
-<span class=ln> 5</span>
-<span class=ln> 6</span><span class=n>Copyright</span> <span class=p>(</span><span class=k>c</span><span class=p>)</span> <span class=mi>1982</span><span class=p>,</span> <span class=mi>2019</span><span class=p>,</span> <span class=n>Oracle</span><span class=p>.</span>  <span class=k>All</span> <span class=n>rights</span> <span class=n>reserved</span><span class=p>.</span>
-<span class=ln> 7</span>
-<span class=ln> 8</span><span class=n>ERROR</span><span class=p>:</span>
-<span class=ln> 9</span><span class=n>ORA</span><span class=o>-</span><span class=mi>12154</span><span class=p>:</span> <span class=n>TNS</span><span class=p>:</span><span class=n>could</span> <span class=k>not</span> <span class=n>resolve</span> <span class=n>the</span> <span class=k>connect</span> <span class=n>identifier</span> <span class=n>specified</span>
-<span class=ln>10</span>
-<span class=ln>11</span>
-<span class=ln>12</span><span class=n>Enter</span> <span class=k>user</span><span class=o>-</span><span class=n>name</span><span class=p>:</span> <span class=k>system</span>
-<span class=ln>13</span><span class=n>Enter</span> <span class=n>password</span><span class=p>:</span>
-<span class=ln>14</span><span class=k>Last</span> <span class=n>Successful</span> <span class=n>login</span> <span class=n>time</span><span class=p>:</span> <span class=n>Tue</span> <span class=n>Nov</span> <span class=mi>23</span> <span class=mi>2021</span> <span class=mi>09</span><span class=p>:</span><span class=mi>11</span><span class=p>:</span><span class=mi>07</span> <span class=o>+</span><span class=mi>08</span><span class=p>:</span><span class=mi>00</span>
-<span class=ln>15</span>
-<span class=ln>16</span><span class=n>Connected</span> <span class=k>to</span><span class=p>:</span>
-<span class=ln>17</span><span class=n>Oracle</span> <span class=k>Database</span> <span class=mi>19</span><span class=k>c</span> <span class=n>Enterprise</span> <span class=n>Edition</span> <span class=n>Release</span> <span class=mi>19</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span> <span class=o>-</span> <span class=n>Production</span>
-<span class=ln>18</span><span class=k>Version</span> <span class=mi>19</span><span class=p>.</span><span class=mi>3</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span>
-<span class=ln>19</span>
-<span class=ln>20</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=s2>&#34;niceram&#34;</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=s2>&#34;passwd&#34;</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;USERS&#34;</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;TEMP&#34;</span><span class=p>;</span>
-<span class=ln>21</span><span class=k>CREATE</span> <span class=k>USER</span> <span class=s2>&#34;niceram&#34;</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=s2>&#34;passwd&#34;</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;USERS&#34;</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;TEMP&#34;</span>
-<span class=ln>22</span>            <span class=o>*</span>
-<span class=ln>23</span><span class=n>ERROR</span> <span class=k>at</span> <span class=n>line</span> <span class=mi>1</span><span class=p>:</span>
-<span class=ln>24</span><span class=n>ORA</span><span class=o>-</span><span class=mi>65096</span><span class=p>:</span> <span class=n>invalid</span> <span class=n>common</span> <span class=k>user</span> <span class=k>or</span> <span class=k>role</span> <span class=n>name</span>
-</code></pre></div><h2 id=原因>原因</h2><p>Oracle 12c 后多了个 <code>PDB</code> 和 <code>CDB</code> 的概念：</p><blockquote><p>The multitenant architecture enables an Oracle database to function as a multitenant container database (CDB).</p><p>A CDB includes zero, one, or many customer-created pluggable databases (PDBs). A PDB is a portable collection of schemas, schema objects, and nonschema objects that appears to an Oracle Net client as a non-CDB. All Oracle databases before Oracle Database 12c were non-CDBs.</p></blockquote><ul><li>CDB (Container Database): 容器数据库。<ul><li>一个 CDB 中可以存在多个 PDB</li><li>在 CDB 中只能创建公共普通用户，用户名以 <code>C##</code> 开头</li><li>默认情况下，登录的数据库被指定为 CDB</li></ul></li><li>PDB (Pluggable Databases): 可插拔数据库。<ul><li>在 PDB 可以创建本地用户，用户名无格式要求</li></ul></li></ul><p>综上，因为默认登录了 CDB，而创建用户时，用户名格式不符合要求，所以报错用户或角色名不可用。</p><h2 id=对策>对策</h2><h3 id=修正用户名>修正用户名</h3><p>用户名前面加上 <code>c##</code>，在 CDB 下创建用户。</p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=ln>1</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>show</span> <span class=n>con_name</span><span class=p>;</span>
-<span class=ln>2</span>
-<span class=ln>3</span><span class=n>CON_NAME</span>
-<span class=ln>4</span><span class=c1>------------------------------
-</span><span class=ln>5</span><span class=c1></span><span class=n>CDB$ROOT</span>
-<span class=ln>6</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=k>c</span><span class=o>##</span><span class=n>niceram</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=n>passwd</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=n>USERS</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=n>TEMP</span><span class=p>;</span>
-<span class=ln>7</span>
-<span class=ln>8</span><span class=k>User</span> <span class=n>created</span><span class=p>.</span>
-</code></pre></div><h3 id=切换至-pdb>切换至 PDB</h3><p>查看并切换到可用的 PDB 再创建用户。</p><div class=highlight><pre class=chroma><code class=language-sql data-lang=sql><span class=ln> 1</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>show</span> <span class=n>con_name</span><span class=p>;</span>
-<span class=ln> 2</span>
-<span class=ln> 3</span><span class=n>CON_NAME</span>
-<span class=ln> 4</span><span class=c1>------------------------------
-</span><span class=ln> 5</span><span class=c1></span><span class=n>CDB$ROOT</span>
-<span class=ln> 6</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>select</span> <span class=n>pdb_name</span> <span class=k>from</span> <span class=n>cdb_pdbs</span><span class=p>;</span> <span class=c1>-- 查询所有 PDB 名称
-</span><span class=ln> 7</span><span class=c1></span>
-<span class=ln> 8</span><span class=n>PDB_NAME</span>
-<span class=ln> 9</span><span class=c1>--------------------------------------------------------------------------------
-</span><span class=ln>10</span><span class=c1></span><span class=n>ORCLPDB1</span>
-<span class=ln>11</span><span class=n>PDB$SEED</span>
-<span class=ln>12</span>
-<span class=ln>13</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>alter</span> <span class=k>session</span> <span class=k>set</span> <span class=n>container</span> <span class=o>=</span> <span class=n>ORCLPDB1</span><span class=p>;</span>  <span class=c1>-- 切换当前 session 到 ORCLPDB1
-</span><span class=ln>14</span><span class=c1></span>
-<span class=ln>15</span><span class=k>Session</span> <span class=n>altered</span><span class=p>.</span>
-<span class=ln>16</span>
-<span class=ln>17</span><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=n>niceram</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=n>passwd</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=n>USERS</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=n>TEMP</span><span class=p>;</span>
-<span class=ln>18</span>
-<span class=ln>19</span><span class=k>User</span> <span class=n>created</span><span class=p>.</span>
-<span class=ln>20</span>
-<span class=ln>21</span><span class=k>SQL</span><span class=o>&gt;</span>
-</code></pre></div><h2 id=可能存在的坑>可能存在的坑</h2><p>创建用户的语句中，用户名加引号和不加引号是有区别的：</p><ul><li>有引号：用户名区分大小写，引号里是什么，创建后的用户名就是什么</li><li>无引号：用户名不分大小写，创建后的用户名将自动转换为大写</li></ul><p>乍一看好像是没什么特别大的影响，但是如果用户名用小写字母加引号创建，在某些第三方的可视化客户端将因不存在对应的用户而无法连接数据库。</p><div class=post-rel><h2 id=相关文章>相关文章</h2><ul><li><a href=https://niceram.xyz/2021/11/23/20211123_1648/>Oracle Database 创建用户并分配角色</a></li></ul></div><div class=post-ref><h2 id=参考链接>参考链接</h2><ul><li><a href=https://qiita.com/HiromasaNojima/items/bb2e8903ab199b34ac70>【Oracle】ユーザ作ろうとしたら、ORA-65096: invalid common user or role name って怒られたときの解決法 - Qiita</a></li><li><a href=https://stackoverflow.com/questions/33330968/error-ora-65096-invalid-common-user-or-role-name-in-oracle>oracle12c - error: ORA-65096: invalid common user or role name in oracle - Stack Overflow</a></li><li><a href=https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22>Introduction to the Multitenant Architecture</a></li></ul></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span class=post-word-count>707 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#问题>问题</a></li><li><a href=#原因>原因</a></li><li><a href=#对策>对策</a><ul><li><a href=#修正用户名>修正用户名</a></li><li><a href=#切换至-pdb>切换至 PDB</a></li></ul></li><li><a href=#可能存在的坑>可能存在的坑</a></li></ul></nav></div></div><div class=post-content><p>上一次用 Oracle 还是 11g ，最近用的 19C 相比变化还不小，甚至连创建用户都超出我的已有知识范围。</p><hr><h2 id=问题>问题</h2><p>登入数据库，用 <code>CREATE USER</code> 创建用户，提示 <code>ORA-65096: invalid common user or role name</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sql data-lang=sql><span class=p>[</span><span class=n>oracle</span><span class=o>@</span><span class=n>Oracle19c</span> <span class=o>~</span><span class=p>]</span><span class=err>$</span> <span class=n>sqlplus</span>
+
+<span class=k>SQL</span><span class=o>*</span><span class=n>Plus</span><span class=p>:</span> <span class=n>Release</span> <span class=mi>19</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span> <span class=o>-</span> <span class=n>Production</span> <span class=k>on</span> <span class=n>Tue</span> <span class=n>Nov</span> <span class=mi>23</span> <span class=mi>09</span><span class=p>:</span><span class=mi>24</span><span class=p>:</span><span class=mi>46</span> <span class=mi>2021</span>
+<span class=k>Version</span> <span class=mi>19</span><span class=p>.</span><span class=mi>3</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span>
+
+<span class=n>Copyright</span> <span class=p>(</span><span class=k>c</span><span class=p>)</span> <span class=mi>1982</span><span class=p>,</span> <span class=mi>2019</span><span class=p>,</span> <span class=n>Oracle</span><span class=p>.</span>  <span class=k>All</span> <span class=n>rights</span> <span class=n>reserved</span><span class=p>.</span>
+
+<span class=n>ERROR</span><span class=p>:</span>
+<span class=n>ORA</span><span class=o>-</span><span class=mi>12154</span><span class=p>:</span> <span class=n>TNS</span><span class=p>:</span><span class=n>could</span> <span class=k>not</span> <span class=n>resolve</span> <span class=n>the</span> <span class=k>connect</span> <span class=n>identifier</span> <span class=n>specified</span>
+
+
+<span class=n>Enter</span> <span class=k>user</span><span class=o>-</span><span class=n>name</span><span class=p>:</span> <span class=k>system</span>
+<span class=n>Enter</span> <span class=n>password</span><span class=p>:</span>
+<span class=k>Last</span> <span class=n>Successful</span> <span class=n>login</span> <span class=n>time</span><span class=p>:</span> <span class=n>Tue</span> <span class=n>Nov</span> <span class=mi>23</span> <span class=mi>2021</span> <span class=mi>09</span><span class=p>:</span><span class=mi>11</span><span class=p>:</span><span class=mi>07</span> <span class=o>+</span><span class=mi>08</span><span class=p>:</span><span class=mi>00</span>
+
+<span class=n>Connected</span> <span class=k>to</span><span class=p>:</span>
+<span class=n>Oracle</span> <span class=k>Database</span> <span class=mi>19</span><span class=k>c</span> <span class=n>Enterprise</span> <span class=n>Edition</span> <span class=n>Release</span> <span class=mi>19</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span> <span class=o>-</span> <span class=n>Production</span>
+<span class=k>Version</span> <span class=mi>19</span><span class=p>.</span><span class=mi>3</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span><span class=p>.</span><span class=mi>0</span>
+
+<span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=s2>&#34;niceram&#34;</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=s2>&#34;passwd&#34;</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;USERS&#34;</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;TEMP&#34;</span><span class=p>;</span>
+<span class=k>CREATE</span> <span class=k>USER</span> <span class=s2>&#34;niceram&#34;</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=s2>&#34;passwd&#34;</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;USERS&#34;</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=s2>&#34;TEMP&#34;</span>
+            <span class=o>*</span>
+<span class=n>ERROR</span> <span class=k>at</span> <span class=n>line</span> <span class=mi>1</span><span class=p>:</span>
+<span class=n>ORA</span><span class=o>-</span><span class=mi>65096</span><span class=p>:</span> <span class=n>invalid</span> <span class=n>common</span> <span class=k>user</span> <span class=k>or</span> <span class=k>role</span> <span class=n>name</span>
+</code></pre></td></tr></table></div></div><h2 id=原因>原因</h2><p>Oracle 12c 后多了个 <code>PDB</code> 和 <code>CDB</code> 的概念：</p><blockquote><p>The multitenant architecture enables an Oracle database to function as a multitenant container database (CDB).</p><p>A CDB includes zero, one, or many customer-created pluggable databases (PDBs). A PDB is a portable collection of schemas, schema objects, and nonschema objects that appears to an Oracle Net client as a non-CDB. All Oracle databases before Oracle Database 12c were non-CDBs.</p></blockquote><ul><li>CDB (Container Database): 容器数据库。<ul><li>一个 CDB 中可以存在多个 PDB</li><li>在 CDB 中只能创建公共普通用户，用户名以 <code>C##</code> 开头</li><li>默认情况下，登录的数据库被指定为 CDB</li></ul></li><li>PDB (Pluggable Databases): 可插拔数据库。<ul><li>在 PDB 可以创建本地用户，用户名无格式要求</li></ul></li></ul><p>综上，因为默认登录了 CDB，而创建用户时，用户名格式不符合要求，所以报错用户或角色名不可用。</p><h2 id=对策>对策</h2><h3 id=修正用户名>修正用户名</h3><p>用户名前面加上 <code>c##</code>，在 CDB 下创建用户。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sql data-lang=sql><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>show</span> <span class=n>con_name</span><span class=p>;</span>
+
+<span class=n>CON_NAME</span>
+<span class=c1>------------------------------
+</span><span class=c1></span><span class=n>CDB$ROOT</span>
+<span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=k>c</span><span class=o>##</span><span class=n>niceram</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=n>passwd</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=n>USERS</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=n>TEMP</span><span class=p>;</span>
+
+<span class=k>User</span> <span class=n>created</span><span class=p>.</span>
+</code></pre></td></tr></table></div></div><h3 id=切换至-pdb>切换至 PDB</h3><p>查看并切换到可用的 PDB 再创建用户。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sql data-lang=sql><span class=k>SQL</span><span class=o>&gt;</span> <span class=k>show</span> <span class=n>con_name</span><span class=p>;</span>
+
+<span class=n>CON_NAME</span>
+<span class=c1>------------------------------
+</span><span class=c1></span><span class=n>CDB$ROOT</span>
+<span class=k>SQL</span><span class=o>&gt;</span> <span class=k>select</span> <span class=n>pdb_name</span> <span class=k>from</span> <span class=n>cdb_pdbs</span><span class=p>;</span> <span class=c1>-- 查询所有 PDB 名称
+</span><span class=c1></span>
+<span class=n>PDB_NAME</span>
+<span class=c1>--------------------------------------------------------------------------------
+</span><span class=c1></span><span class=n>ORCLPDB1</span>
+<span class=n>PDB$SEED</span>
+
+<span class=k>SQL</span><span class=o>&gt;</span> <span class=k>alter</span> <span class=k>session</span> <span class=k>set</span> <span class=n>container</span> <span class=o>=</span> <span class=n>ORCLPDB1</span><span class=p>;</span>  <span class=c1>-- 切换当前 session 到 ORCLPDB1
+</span><span class=c1></span>
+<span class=k>Session</span> <span class=n>altered</span><span class=p>.</span>
+
+<span class=k>SQL</span><span class=o>&gt;</span> <span class=k>CREATE</span> <span class=k>USER</span> <span class=n>niceram</span> <span class=n>IDENTIFIED</span> <span class=k>BY</span> <span class=n>passwd</span> <span class=k>DEFAULT</span> <span class=n>TABLESPACE</span> <span class=n>USERS</span> <span class=k>TEMPORARY</span> <span class=n>TABLESPACE</span> <span class=n>TEMP</span><span class=p>;</span>
+
+<span class=k>User</span> <span class=n>created</span><span class=p>.</span>
+
+<span class=k>SQL</span><span class=o>&gt;</span>
+</code></pre></td></tr></table></div></div><h2 id=可能存在的坑>可能存在的坑</h2><p>创建用户的语句中，用户名加引号和不加引号是有区别的：</p><ul><li>有引号：用户名区分大小写，引号里是什么，创建后的用户名就是什么</li><li>无引号：用户名不分大小写，创建后的用户名将自动转换为大写</li></ul><p>乍一看好像是没什么特别大的影响，但是如果用户名用小写字母加引号创建，在某些第三方的可视化客户端将因不存在对应的用户而无法连接数据库。</p><div class=post-rel><h2 id=相关文章>相关文章</h2><ul><li><a href=https://niceram.xyz/2021/11/23/20211123_1648/>Oracle Database 创建用户并分配角色</a></li></ul></div><div class=post-ref><h2 id=参考链接>参考链接</h2><ul><li><a href=https://qiita.com/HiromasaNojima/items/bb2e8903ab199b34ac70>【Oracle】ユーザ作ろうとしたら、ORA-65096: invalid common user or role name って怒られたときの解決法 - Qiita</a></li><li><a href=https://stackoverflow.com/questions/33330968/error-ora-65096-invalid-common-user-or-role-name-in-oracle>oracle12c - error: ORA-65096: invalid common user or role name in oracle - Stack Overflow</a></li><li><a href=https://docs.oracle.com/en/database/oracle/oracle-database/19/multi/introduction-to-the-multitenant-architecture.html#GUID-267F7D12-D33F-4AC9-AA45-E9CD671B6F22>Introduction to the Multitenant Architecture</a></li></ul></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>niceRAM</span></p><p class=copyright-item><span>Link:</span>
 <a href=https://niceram.xyz/2021/11/24/20211124_1449/>https://niceram.xyz/2021/11/24/20211124_1449/</a></p><p class="copyright-item lincese">本文采用<a rel=license href=http://creativecommons.org/licenses/by-nc/4.0/ target=_blank>知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
 <span class=tag><a href=https://niceram.xyz/tags/oracle/>#Oracle</a></span>

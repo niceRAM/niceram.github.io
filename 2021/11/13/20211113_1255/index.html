@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/07/07/20210707_1441/><link rel=next href=https://niceram.xyz/2021/11/21/20211121_2116/><link rel=canonical href=https://niceram.xyz/2021/11/13/20211113_1255/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>使用 Docker 构建 Caddy v1 并自定义插件 | NiceBlog</title><meta name=title content="使用 Docker 构建 Caddy v1 并自定义插件 | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"使用 Docker 构建 Caddy v1 并自定义插件","headline":"使用 Docker 构建 Caddy v1 并自定义插件","description":"Caddy 是和 NginX 一样的 Web Server，支持反向代理、负载均衡等常见功能，更厉害的是 Caddy 还支持自动向 Let\u0026#39;s Encrypt 签发 HTTPS 证书。 不过由于 Caddy2 发布不久，官方网站已不再支","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-11-13 12:55:31 \u002b0800 \u002b0800","dateModified":"2021-11-13 12:55:31 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/11\/13\/20211113_1255\/","wordCount":"1527","keywords":["Docker","CloudFlare","Caddy1","Caddy","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="niceRAM"><meta name=description content="niceRAM's Blog"><link rel=prev href=https://niceram.xyz/2021/07/07/20210707_1441/><link rel=next href=https://niceram.xyz/2021/11/21/20211121_2116/><link rel=canonical href=https://niceram.xyz/2021/11/13/20211113_1255/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>使用 Docker 构建 Caddy v1 并自定义插件 | NiceBlog</title><meta name=title content="使用 Docker 构建 Caddy v1 并自定义插件 | NiceBlog"><link rel=stylesheet href=/css/main.min.css><link rel=stylesheet href=/font/iconfont.css><link rel=stylesheet href=/font-ali/iconfont.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/niceram.xyz\/"},"articleSection":"posts","name":"使用 Docker 构建 Caddy v1 并自定义插件","headline":"使用 Docker 构建 Caddy v1 并自定义插件","description":"Caddy 是和 NginX 一样的 Web Server，支持反向代理、负载均衡等常见功能，更厉害的是 Caddy 还支持自动向 Let\u0026#39;s Encrypt 签发 HTTPS 证书。 不过由于 Caddy2 发布不久，官方网站已不再支","inLanguage":"zh-CN","author":"niceRAM","creator":"niceRAM","publisher":"niceRAM","accountablePerson":"niceRAM","copyrightHolder":"niceRAM","copyrightYear":"2021","datePublished":"2021-11-13 12:55:31 \u002b0800 \u002b0800","dateModified":"2021-11-13 12:55:31 \u002b0800 \u002b0800","url":"https:\/\/niceram.xyz\/2021\/11\/13\/20211113_1255\/","wordCount":"1610","keywords":["Docker","CloudFlare","Caddy1","Caddy","NiceBlog"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
 <a href=https://niceram.xyz/><span class=logo_text>cd /home/</span>
 <span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/ title>📚Blog</a>
 <a class=menu-item href=/categories/ title>📂Categories</a>
@@ -8,136 +8,261 @@
 <span class=post-time>on <time datetime=2021-11-13 itemprop=datePublished>November 13, 2021</time></span>
 in
 <i class="iconfont icon-folder"></i><span class=post-category><a href=https://niceram.xyz/categories/%E8%99%9A%E6%8B%9F%E5%8C%96%E6%8A%80%E6%9C%AF/>虚拟化技术,</a></span>
-<span class=post-word-count>1527 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#安装-docker>安装 Docker</a></li><li><a href=#镜像准备>镜像准备</a><ul><li><a href=#克隆仓库>克隆仓库</a></li><li><a href=#查找第三方插件caddy1>查找第三方插件（Caddy1）</a></li><li><a href=#添加第三方插件>添加第三方插件</a></li><li><a href=#构建镜像并启动容器>构建镜像并启动容器</a></li></ul></li></ul></nav></div></div><div class=post-content><p>Caddy 是和 NginX 一样的 Web Server，支持反向代理、负载均衡等常见功能，更厉害的是 Caddy 还支持自动向
+<span class=post-word-count>1610 words</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title></h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#安装-docker>安装 Docker</a></li><li><a href=#镜像准备>镜像准备</a><ul><li><a href=#克隆仓库>克隆仓库</a></li><li><a href=#查找第三方插件caddy1>查找第三方插件（Caddy1）</a></li><li><a href=#添加第三方插件>添加第三方插件</a></li><li><a href=#构建镜像并启动容器>构建镜像并启动容器</a></li></ul></li></ul></nav></div></div><div class=post-content><p>Caddy 是和 NginX 一样的 Web Server，支持反向代理、负载均衡等常见功能，更厉害的是 Caddy 还支持自动向
 <a href="https://www.google.com/search?q=Let%27s%20Encrypt" target=_blank><i class="iconfont icon-search">Let's Encrypt</i></a>
-签发 HTTPS 证书。</p><p>不过由于 Caddy2 发布不久，官方网站已不再支持 Caddy1 的在线构建和插件打包了。前几天研究了下，由于不懂 Golang，几个问题拖了不少时间，最后总算是搞定了，在此记录下来。</p><hr><h2 id=安装-docker>安装 Docker</h2><p>Caddy 是使用 Golang 开发构建的，虽然安装 Go 开发环境也行，不过个人不使用 Go 进行开发作业的话，建议使用 Docker。</p><p>安装 Docker 这一步必然是必须的，不过本文不做讲解，善用搜索引擎或官方文档 <a href=https://docs.docker.com/get-docker/>Get Docker | Docker Documentation</a> 很容易就能解决。</p><h2 id=镜像准备>镜像准备</h2><p>DockerHub 上搜索 Caddy，使用率最高的是 <a href=https://hub.docker.com/r/abiosoft/caddy/>abiosoft/caddy - Docker Image | Docker Hub</a>，不过本人尝试多次，总是会构建失败，根据 <a href=https://github.com/abiosoft/caddy-docker/issues/248>Docker-Compose Build Failure · Issue #248 · abiosoft/caddy-docker</a> 得知，使用 <code>--build-args plugins=xxx</code> 添加第三方插件时可能会使用与 Caddy1 不兼容版本的其他插件。</p><p><em><strong>Note:</strong> 详细的没有再看，推测是有的插件作者在 Caddy2 发布后也顺势更新了自己的插件吧，然后由于作者的镜像是使用脚本爬取插件的最新 module，就是 Golang 里 import, require 里写的类似网址的东西，所以可能出现构建 Caddy 时使用了 Caddy2 插件的情况</em></p><p>不过，在该 Issue 下有大佬提到他修改了 abiosoft 的镜像，并且有人使用他修改的镜像成功构建了，我决定尝试一下——从仓库开始构建镜像。</p><p>仓库地址：<a href=https://github.com/Yun-Mao/caddy_docker>Yun-Mao/caddy_docker: Caddy_docker</a></p><h3 id=克隆仓库>克隆仓库</h3><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln>1</span>git clone https://github.com/Yun-Mao/caddy_docker.git
-</code></pre></div><h3 id=查找第三方插件caddy1>查找第三方插件（Caddy1）</h3><p>Yun-Mao/caddy_docker 是基于 abiosoft/caddy 修改，不使用 <code>--build-args</code> 而是直接在 <code>build.sh</code> 中指定第三方插件的 GoPath</p><p>第三方插件根据个人需求而定，本文中添加的第三方插件是： tls.dns.cloudflare, http.forwardproxy, http.filter, http.ipfilter。还有几个是仓库原本就有：caddy-cache, caddy-minify, caddy-expires, caddy-realip。如果还需要别的插件，请善用搜索引擎+github，确认自己所需插件的 module 名。</p><p>简单来说思路就是：</p><ol><li>通过插件的关键字找到对应的 github 仓库</li><li>在仓库的 tag 找到兼容 Caddy1 的版本</li><li>在该 tag 下找 <code>go.mod</code> 或者 <code>&lt;插件名>.go</code> 后，确认里面的 module 名（不出意外就是第一行）</li></ol><h3 id=添加第三方插件>添加第三方插件</h3><p>进入 <code>caddy_docker</code> 目录，打开 <code>builder.sh</code>，找到 <code>module()</code> 函数，根据需求修改。</p><p>我添加 <code>tls.dns.cloudflare</code> 没有像 Yun-Mao 那样自定义几个函数，那些好像是指定 tls 插件的 email 和 apikey 的。</p><p>一开始我也是使用 <code>github.com/go-acme/lego</code> 的 cloudflare 插件，修改 <code>NewDNSProvider</code> 等函数来构建，
-后来发现使用 <code>github.com/caddyserver/dnsproviders/cloudflare</code> 直接构建目前也没发现什么问题，仍然可以正常使用，索性就删掉了多余的部分。</p><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln> 1</span>module<span class=o>()</span> <span class=o>{</span>
-<span class=ln> 2</span>    mkdir -p /caddy
-<span class=ln> 3</span>    <span class=nb>cd</span> /caddy <span class=c1># build dir</span>
-<span class=ln> 4</span>    cat &gt; go.mod <span class=s>&lt;&lt;EOF
-</span><span class=ln> 5</span><span class=s>    module caddy
-</span><span class=ln> 6</span><span class=s>
-</span><span class=hl><span class=ln> 7</span><span class=s>    go 1.14
-</span></span><span class=ln> 8</span><span class=s>
-</span><span class=ln> 9</span><span class=s>    require (
-</span><span class=ln>10</span><span class=s>        github.com/caddyserver/caddy v1.0.5
-</span><span class=hl><span class=ln>11</span><span class=s>        github.com/caddyserver/dnsproviders v0.4.0
-</span></span><span class=hl><span class=ln>12</span><span class=s>        github.com/grpc-ecosystem/grpc-gateway v1.16.0
-</span></span><span class=hl><span class=ln>13</span><span class=s>        github.com/lucas-clemente/quic-go v0.19.3
-</span></span><span class=ln>14</span><span class=s>        github.com/captncraig/caddy-realip v0.0.0-20190710144553-6df827e22ab8
-</span><span class=ln>15</span><span class=s>        github.com/echocat/caddy-filter v0.14.0
-</span><span class=ln>16</span><span class=s>        github.com/epicagency/caddy-expires v1.1.1
-</span><span class=ln>17</span><span class=s>        github.com/hacdias/caddy-minify v1.0.2
-</span><span class=ln>18</span><span class=s>        github.com/nicolasazrak/caddy-cache v0.3.4
-</span><span class=ln>19</span><span class=s>        github.com/pquerna/cachecontrol v0.0.0-20180517163645-1555304b9b35 // indirect
-</span><span class=ln>20</span><span class=s>    )
-</span><span class=ln>21</span><span class=s>EOF</span>
-<span class=ln>22</span>    <span class=c1># main and telemetry</span>
-<span class=ln>23</span>    cat &gt; main.go <span class=s>&lt;&lt;EOF
-</span><span class=ln>24</span><span class=s>    package main
-</span><span class=ln>25</span><span class=s>
-</span><span class=ln>26</span><span class=s>    import (
-</span><span class=ln>27</span><span class=s>        &#34;github.com/caddyserver/caddy/caddy/caddymain&#34;
-</span><span class=ln>28</span><span class=s>
-</span><span class=hl><span class=ln>29</span><span class=s>        _ &#34;github.com/caddyserver/dnsproviders/cloudflare&#34;
-</span></span><span class=hl><span class=ln>30</span><span class=s>        _ &#34;github.com/caddyserver/forwardproxy&#34;                 //http.forwardproxy
-</span></span><span class=hl><span class=ln>31</span><span class=s>        _ &#34;github.com/pyed/ipfilter&#34;                            //http.ipfilter
-</span></span><span class=ln>32</span><span class=s>        _ &#34;github.com/echocat/caddy-filter&#34;
-</span><span class=ln>33</span><span class=s>        _ &#34;github.com/nicolasazrak/caddy-cache&#34;
-</span><span class=ln>34</span><span class=s>        _ &#34;github.com/hacdias/caddy-minify&#34;
-</span><span class=ln>35</span><span class=s>        _ &#34;github.com/epicagency/caddy-expires&#34;
-</span><span class=ln>36</span><span class=s>        _ &#34;github.com/captncraig/caddy-realip&#34;
-</span><span class=ln>37</span><span class=s>    )
-</span><span class=ln>38</span><span class=s>
-</span><span class=ln>39</span><span class=s>    func main() {
-</span><span class=ln>40</span><span class=s>        caddymain.E</span>nableTelemetry <span class=o>=</span> <span class=nb>false</span>
-<span class=ln>41</span>        caddymain.Run<span class=o>()</span>
-<span class=ln>42</span>    <span class=o>}</span>
-</code></pre></div><p>部分 module 依赖 go1.14，所以还需要修改 <code>Dockerfile</code></p><div class=highlight><pre class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=hl><span class=ln> 1</span><span class=k>FROM</span><span class=s> golang:1.14-alpine as builder</span><span class=err>
-</span></span><span class=ln> 2</span><span class=err></span><span class=k>RUN</span> apk add --no-cache git gcc musl-dev<span class=err>
-</span><span class=ln> 3</span><span class=err></span><span class=k>RUN</span> mkdir /www /caddy<span class=err>
-</span><span class=ln> 4</span><span class=err></span><span class=k>COPY</span> builder.sh /usr/bin/builder.sh<span class=err>
-</span><span class=ln> 5</span><span class=err></span><span class=k>ARG</span> <span class=nv>version</span><span class=o>=</span><span class=s2>&#34;1.0.5&#34;</span><span class=err>
-</span><span class=ln> 6</span><span class=err></span><span class=k>RUN</span> <span class=nv>VERSION</span><span class=o>=</span><span class=si>${</span><span class=nv>version</span><span class=si>}</span> /bin/sh /usr/bin/builder.sh<span class=err>
-</span><span class=ln> 7</span><span class=err>
-</span><span class=ln> 8</span><span class=err>
-</span><span class=ln> 9</span><span class=err></span><span class=k>FROM</span><span class=s> alpine:latest</span><span class=err>
-</span><span class=ln>10</span><span class=err>
-</span><span class=ln>11</span><span class=err></span><span class=k>ENV</span> <span class=nv>CADDY_VERSION</span><span class=o>=</span><span class=m>1</span>.0.5<span class=err>
-</span><span class=ln>12</span><span class=err>
-</span><span class=ln>13</span><span class=err></span><span class=k>ENV</span> <span class=nv>CADDYPATH</span><span class=o>=</span>/caddy/certs<span class=err>
-</span><span class=ln>14</span><span class=err>
-</span><span class=ln>15</span><span class=err></span><span class=k>RUN</span> apk add --no-cache <span class=se>\
-</span><span class=ln>16</span><span class=se></span>    ca-certificates <span class=se>\
-</span><span class=ln>17</span><span class=se></span>    git <span class=se>\
-</span><span class=ln>18</span><span class=se></span>    mailcap <span class=se>\
-</span><span class=ln>19</span><span class=se></span>    openssh-client <span class=se>\
-</span><span class=ln>20</span><span class=se></span>    tzdata<span class=err>
-</span><span class=ln>21</span><span class=err>
-</span><span class=ln>22</span><span class=err>
-</span><span class=ln>23</span><span class=err></span><span class=k>COPY</span> --from<span class=o>=</span>builder /install/caddy /usr/bin/caddy<span class=err>
-</span><span class=ln>24</span><span class=err>
-</span><span class=ln>25</span><span class=err></span><span class=k>RUN</span> /usr/bin/caddy -version<span class=err>
-</span><span class=ln>26</span><span class=err></span><span class=k>RUN</span> /usr/bin/caddy -plugins<span class=err>
-</span><span class=ln>27</span><span class=err>
-</span><span class=ln>28</span><span class=err></span><span class=k>EXPOSE</span><span class=s> 80 443 2015</span><span class=err>
-</span><span class=ln>29</span><span class=err></span><span class=k>VOLUME</span><span class=s> /root/.caddy /www</span><span class=err>
-</span><span class=ln>30</span><span class=err></span><span class=k>WORKDIR</span><span class=s> /www</span><span class=err>
-</span><span class=ln>31</span><span class=err>
-</span><span class=ln>32</span><span class=err></span><span class=k>COPY</span> Caddyfile /caddy/Caddyfile<span class=err>
-</span><span class=ln>33</span><span class=err>
-</span><span class=ln>34</span><span class=err></span><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;caddy&#34;</span><span class=p>,</span><span class=s2>&#34;--conf&#34;</span><span class=p>,</span> <span class=s2>&#34;/caddy/Caddyfile&#34;</span><span class=p>,</span> <span class=s2>&#34;--log&#34;</span><span class=p>,</span> <span class=s2>&#34;stdout&#34;</span><span class=p>,</span> <span class=s2>&#34;--agree&#34;</span><span class=p>]</span><span class=err>
-</span></code></pre></div><h3 id=构建镜像并启动容器>构建镜像并启动容器</h3><p>建议通过 <code>docker-compose</code> 构建镜像</p><ol><li>创建 docker-compose.yaml</li></ol><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln>1</span><span class=nb>cd</span> caddy_docker
-<span class=ln>2</span>touch docker-compose.yaml
-</code></pre></div><ol start=2><li>编辑 docker-compose.yaml ，添加以下内容</li></ol><div class=highlight><pre class=chroma><code class=language-yaml data-lang=yaml><span class=ln> 1</span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3&#39;</span><span class=w>
-</span><span class=ln> 2</span><span class=w>
-</span><span class=ln> 3</span><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
-</span><span class=ln> 4</span><span class=w>  </span><span class=nt>caddy</span><span class=p>:</span><span class=w>
-</span><span class=ln> 5</span><span class=w>    </span><span class=nt>container_name</span><span class=p>:</span><span class=w> </span><span class=l>caddy</span><span class=w>
-</span><span class=ln> 6</span><span class=w>    </span><span class=nt>build</span><span class=p>:</span><span class=w>
-</span><span class=ln> 7</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>./caddy_docker</span><span class=w>
-</span><span class=ln> 8</span><span class=w>      </span><span class=nt>args</span><span class=p>:</span><span class=w>
-</span><span class=ln> 9</span><span class=w>        </span><span class=nt>network</span><span class=p>:</span><span class=w> </span><span class=l>host</span><span class=w>
-</span><span class=ln>10</span><span class=w>        </span><span class=c># HTTPS_PROXY: </span><span class=w>
-</span><span class=ln>11</span><span class=w>        </span><span class=c># NO_PROXY: localhost,127.0.0.1</span><span class=w>
-</span><span class=ln>12</span><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
-</span><span class=ln>13</span><span class=w>    </span><span class=nt>network_mode</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;host&#34;</span><span class=w>
-</span><span class=ln>14</span><span class=w>    </span><span class=c># environment:</span><span class=w>
-</span><span class=ln>15</span><span class=w>    </span><span class=c>#   CLOUDFLARE_EMAIL: </span><span class=w>
-</span><span class=ln>16</span><span class=w>    </span><span class=c>#   CLOUDFLARE_API_KEY: </span><span class=w>
-</span><span class=ln>17</span><span class=w>    </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
-</span><span class=ln>18</span><span class=w>      </span>- <span class=l>./Caddyfile:/caddy/Caddyfile</span><span class=w>
-</span><span class=ln>19</span><span class=w>      </span>- <span class=l>./certs:/caddy/certs</span><span class=w>
-</span><span class=ln>20</span><span class=w>      </span>- <span class=l>./.caddy:/root/.caddy</span><span class=w>
-</span><span class=ln>21</span><span class=w>      </span>- <span class=l>./www:/www/:rw</span><span class=w>
-</span></code></pre></div><p>或直接使用 cat</p><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln> 1</span>cat &gt; docker-compose.yaml <span class=s>&lt;&lt;EOF
-</span><span class=ln> 2</span><span class=s>version: &#39;3&#39;
-</span><span class=ln> 3</span><span class=s>
-</span><span class=ln> 4</span><span class=s>services:
-</span><span class=ln> 5</span><span class=s>  caddy:
-</span><span class=ln> 6</span><span class=s>    container_name: caddy
-</span><span class=ln> 7</span><span class=s>    build:
-</span><span class=ln> 8</span><span class=s>      context: ./caddy_docker
-</span><span class=ln> 9</span><span class=s>      args:
-</span><span class=ln>10</span><span class=s>        network: host
-</span><span class=ln>11</span><span class=s>        # HTTPS_PROXY: 
-</span><span class=ln>12</span><span class=s>        # NO_PROXY: localhost,127.0.0.1
-</span><span class=ln>13</span><span class=s>    restart: always
-</span><span class=ln>14</span><span class=s>    network_mode: &#34;host&#34;
-</span><span class=ln>15</span><span class=s>    # environment:
-</span><span class=ln>16</span><span class=s>    #   CLOUDFLARE_EMAIL: 
-</span><span class=ln>17</span><span class=s>    #   CLOUDFLARE_API_KEY: 
-</span><span class=ln>18</span><span class=s>    volumes:
-</span><span class=ln>19</span><span class=s>      - ./Caddyfile:/caddy/Caddyfile
-</span><span class=ln>20</span><span class=s>      - ./certs:/caddy/certs
-</span><span class=ln>21</span><span class=s>      - ./.caddy:/root/.caddy
-</span><span class=ln>22</span><span class=s>      - ./www:/www/:rw
-</span><span class=ln>23</span><span class=s>EOF</span>
-</code></pre></div><ol start=3><li>构建</li></ol><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln>1</span>docker-compose build --force-rm
-</code></pre></div><p><em><strong>Tips:</strong> <code>--force-rm</code> 参数是为了构建结束自动删除镜像，构建失败的场景下偷懒很有用</em></p><ol start=4><li>启动
-把自己的 Caddyfile 放在和 docker-compose.yaml 同目录下就可以启动了</li></ol><div class=highlight><pre class=chroma><code class=language-sh data-lang=sh><span class=ln>1</span>docker-compose up
-</code></pre></div><p><em><strong>Note:</strong> 第一次启动建议不要加 <code>-d</code>，在前台可以及时看到 ssl 证书是否成功签发，服务是否已经正常启动，如果有问题直接 <code>Ctrl+C</code>。正常启动后要切换至后台，<code>Ctrl+Z</code> 就可以了。</em></p><p>很重要的一点，<strong>一定要把容器的 <code>/caddy/certs</code> 挂载到宿主机上</strong>，这个目录就是 ssl 证书的存储目录，如果不挂载到宿主机上，每次重启容器都要重新签发证书，短时间内请求过多的话自然就会被 Let&rsquo;s Encrypt 拒绝访问了。</p><p>如果需要把已经构建好的 caddy 程序放到另一台同架构的机器上运行，把容器里的 <code>/usr/bin/caddy</code> 拷贝出来或者构建容器的时候把容器的 <code>/install</code> 挂载到宿主机上就行。</p><p>要记录的到这里就结束了，完整项目已上传到 github：<a href=https://github.com/niceRAM/caddy_docker>niceRAM/caddy_docker: Caddy_docker</a></p><div class=post-ref><h2 id=参考链接>参考链接</h2><ul><li><a href=https://github.com/abiosoft/caddy-docker>Docker container for Caddy</a>
+签发 HTTPS 证书。</p><p>不过由于 Caddy2 发布不久，官方网站已不再支持 Caddy1 的在线构建和插件打包了。前几天研究了下，由于不懂 Golang，几个问题拖了不少时间，最后总算是搞定了，在此记录下来。</p><hr><h2 id=安装-docker>安装 Docker</h2><p>Caddy 是使用 Golang 开发构建的，虽然安装 Go 开发环境也行，不过个人不使用 Go 进行开发作业的话，建议使用 Docker。</p><p>安装 Docker 这一步必然是必须的，不过本文不做讲解，善用搜索引擎或官方文档 <a href=https://docs.docker.com/get-docker/>Get Docker | Docker Documentation</a> 很容易就能解决。</p><h2 id=镜像准备>镜像准备</h2><p>DockerHub 上搜索 Caddy，使用率最高的是 <a href=https://hub.docker.com/r/abiosoft/caddy/>abiosoft/caddy - Docker Image | Docker Hub</a>，不过本人尝试多次，总是会构建失败，根据 <a href=https://github.com/abiosoft/caddy-docker/issues/248>Docker-Compose Build Failure · Issue #248 · abiosoft/caddy-docker</a> 得知，使用 <code>--build-args plugins=xxx</code> 添加第三方插件时可能会使用与 Caddy1 不兼容版本的其他插件。</p><p><em><strong>Note:</strong> 详细的没有再看，推测是有的插件作者在 Caddy2 发布后也顺势更新了自己的插件吧，然后由于作者的镜像是使用脚本爬取插件的最新 module，就是 Golang 里 import, require 里写的类似网址的东西，所以可能出现构建 Caddy 时使用了 Caddy2 插件的情况</em></p><p>不过，在该 Issue 下有大佬提到他修改了 abiosoft 的镜像，并且有人使用他修改的镜像成功构建了，我决定尝试一下——从仓库开始构建镜像。</p><p>仓库地址：<a href=https://github.com/Yun-Mao/caddy_docker>Yun-Mao/caddy_docker: Caddy_docker</a></p><h3 id=克隆仓库>克隆仓库</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh>git clone https://github.com/Yun-Mao/caddy_docker.git
+</code></pre></td></tr></table></div></div><h3 id=查找第三方插件caddy1>查找第三方插件（Caddy1）</h3><p>Yun-Mao/caddy_docker 是基于 abiosoft/caddy 修改，不使用 <code>--build-args</code> 而是直接在 <code>build.sh</code> 中指定第三方插件的 GoPath</p><p>第三方插件根据个人需求而定，本文中添加的第三方插件是： tls.dns.cloudflare, http.forwardproxy, http.filter, http.ipfilter。还有几个是仓库原本就有：caddy-cache, caddy-minify, caddy-expires, caddy-realip。如果还需要别的插件，请善用搜索引擎+github，确认自己所需插件的 module 名。</p><p>简单来说思路就是：</p><ol><li>通过插件的关键字找到对应的 github 仓库</li><li>在仓库的 tag 找到兼容 Caddy1 的版本</li><li>在该 tag 下找 <code>go.mod</code> 或者 <code>&lt;插件名>.go</code> 后，确认里面的 module 名（不出意外就是第一行）</li></ol><h3 id=添加第三方插件>添加第三方插件</h3><p>进入 <code>caddy_docker</code> 目录，打开 <code>builder.sh</code>，找到 <code>module()</code> 函数，根据需求修改。</p><p>我添加 <code>tls.dns.cloudflare</code> 没有像 Yun-Mao 那样自定义几个函数，那些好像是指定 tls 插件的 email 和 apikey 的。</p><p>一开始我也是使用 <code>github.com/go-acme/lego</code> 的 cloudflare 插件，修改 <code>NewDNSProvider</code> 等函数来构建，
+后来发现使用 <code>github.com/caddyserver/dnsproviders/cloudflare</code> 直接构建目前也没发现什么问题，仍然可以正常使用，索性就删掉了多余的部分。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=hl><span class=lnt> 7
+</span></span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=hl><span class=lnt>11
+</span></span><span class=hl><span class=lnt>12
+</span></span><span class=hl><span class=lnt>13
+</span></span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=hl><span class=lnt>29
+</span></span><span class=hl><span class=lnt>30
+</span></span><span class=hl><span class=lnt>31
+</span></span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh>module<span class=o>()</span> <span class=o>{</span>
+    mkdir -p /caddy
+    <span class=nb>cd</span> /caddy <span class=c1># build dir</span>
+    cat &gt; go.mod <span class=s>&lt;&lt;EOF
+</span><span class=s>    module caddy
+</span><span class=s>
+</span><span class=hl><span class=s>    go 1.14
+</span></span><span class=s>
+</span><span class=s>    require (
+</span><span class=s>        github.com/caddyserver/caddy v1.0.5
+</span><span class=hl><span class=s>        github.com/caddyserver/dnsproviders v0.4.0
+</span></span><span class=hl><span class=s>        github.com/grpc-ecosystem/grpc-gateway v1.16.0
+</span></span><span class=hl><span class=s>        github.com/lucas-clemente/quic-go v0.19.3
+</span></span><span class=s>        github.com/captncraig/caddy-realip v0.0.0-20190710144553-6df827e22ab8
+</span><span class=s>        github.com/echocat/caddy-filter v0.14.0
+</span><span class=s>        github.com/epicagency/caddy-expires v1.1.1
+</span><span class=s>        github.com/hacdias/caddy-minify v1.0.2
+</span><span class=s>        github.com/nicolasazrak/caddy-cache v0.3.4
+</span><span class=s>        github.com/pquerna/cachecontrol v0.0.0-20180517163645-1555304b9b35 // indirect
+</span><span class=s>    )
+</span><span class=s>EOF</span>
+    <span class=c1># main and telemetry</span>
+    cat &gt; main.go <span class=s>&lt;&lt;EOF
+</span><span class=s>    package main
+</span><span class=s>
+</span><span class=s>    import (
+</span><span class=s>        &#34;github.com/caddyserver/caddy/caddy/caddymain&#34;
+</span><span class=s>
+</span><span class=hl><span class=s>        _ &#34;github.com/caddyserver/dnsproviders/cloudflare&#34;
+</span></span><span class=hl><span class=s>        _ &#34;github.com/caddyserver/forwardproxy&#34;                 //http.forwardproxy
+</span></span><span class=hl><span class=s>        _ &#34;github.com/pyed/ipfilter&#34;                            //http.ipfilter
+</span></span><span class=s>        _ &#34;github.com/echocat/caddy-filter&#34;
+</span><span class=s>        _ &#34;github.com/nicolasazrak/caddy-cache&#34;
+</span><span class=s>        _ &#34;github.com/hacdias/caddy-minify&#34;
+</span><span class=s>        _ &#34;github.com/epicagency/caddy-expires&#34;
+</span><span class=s>        _ &#34;github.com/captncraig/caddy-realip&#34;
+</span><span class=s>    )
+</span><span class=s>
+</span><span class=s>    func main() {
+</span><span class=s>        caddymain.E</span>nableTelemetry <span class=o>=</span> <span class=nb>false</span>
+        caddymain.Run<span class=o>()</span>
+    <span class=o>}</span>
+</code></pre></td></tr></table></div></div><p>部分 module 依赖 go1.14，所以还需要修改 <code>Dockerfile</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=hl><span class=lnt> 1
+</span></span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=hl><span class=k>FROM</span><span class=s> golang:1.14-alpine as builder</span><span class=err>
+</span></span><span class=err></span><span class=k>RUN</span> apk add --no-cache git gcc musl-dev<span class=err>
+</span><span class=err></span><span class=k>RUN</span> mkdir /www /caddy<span class=err>
+</span><span class=err></span><span class=k>COPY</span> builder.sh /usr/bin/builder.sh<span class=err>
+</span><span class=err></span><span class=k>ARG</span> <span class=nv>version</span><span class=o>=</span><span class=s2>&#34;1.0.5&#34;</span><span class=err>
+</span><span class=err></span><span class=k>RUN</span> <span class=nv>VERSION</span><span class=o>=</span><span class=si>${</span><span class=nv>version</span><span class=si>}</span> /bin/sh /usr/bin/builder.sh<span class=err>
+</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>FROM</span><span class=s> alpine:latest</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> <span class=nv>CADDY_VERSION</span><span class=o>=</span><span class=m>1</span>.0.5<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>ENV</span> <span class=nv>CADDYPATH</span><span class=o>=</span>/caddy/certs<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>RUN</span> apk add --no-cache <span class=se>\
+</span><span class=se></span>    ca-certificates <span class=se>\
+</span><span class=se></span>    git <span class=se>\
+</span><span class=se></span>    mailcap <span class=se>\
+</span><span class=se></span>    openssh-client <span class=se>\
+</span><span class=se></span>    tzdata<span class=err>
+</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>COPY</span> --from<span class=o>=</span>builder /install/caddy /usr/bin/caddy<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>RUN</span> /usr/bin/caddy -version<span class=err>
+</span><span class=err></span><span class=k>RUN</span> /usr/bin/caddy -plugins<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>EXPOSE</span><span class=s> 80 443 2015</span><span class=err>
+</span><span class=err></span><span class=k>VOLUME</span><span class=s> /root/.caddy /www</span><span class=err>
+</span><span class=err></span><span class=k>WORKDIR</span><span class=s> /www</span><span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>COPY</span> Caddyfile /caddy/Caddyfile<span class=err>
+</span><span class=err>
+</span><span class=err></span><span class=k>CMD</span> <span class=p>[</span><span class=s2>&#34;caddy&#34;</span><span class=p>,</span><span class=s2>&#34;--conf&#34;</span><span class=p>,</span> <span class=s2>&#34;/caddy/Caddyfile&#34;</span><span class=p>,</span> <span class=s2>&#34;--log&#34;</span><span class=p>,</span> <span class=s2>&#34;stdout&#34;</span><span class=p>,</span> <span class=s2>&#34;--agree&#34;</span><span class=p>]</span><span class=err>
+</span></code></pre></td></tr></table></div></div><h3 id=构建镜像并启动容器>构建镜像并启动容器</h3><p>建议通过 <code>docker-compose</code> 构建镜像</p><ol><li>创建 docker-compose.yaml</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh><span class=nb>cd</span> caddy_docker
+touch docker-compose.yaml
+</code></pre></td></tr></table></div></div><ol start=2><li>编辑 docker-compose.yaml ，添加以下内容</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;3&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>services</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>caddy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>container_name</span><span class=p>:</span><span class=w> </span><span class=l>caddy</span><span class=w>
+</span><span class=w>    </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>./caddy_docker</span><span class=w>
+</span><span class=w>      </span><span class=nt>args</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>network</span><span class=p>:</span><span class=w> </span><span class=l>host</span><span class=w>
+</span><span class=w>        </span><span class=c># HTTPS_PROXY: </span><span class=w>
+</span><span class=w>        </span><span class=c># NO_PROXY: localhost,127.0.0.1</span><span class=w>
+</span><span class=w>    </span><span class=nt>restart</span><span class=p>:</span><span class=w> </span><span class=l>always</span><span class=w>
+</span><span class=w>    </span><span class=nt>network_mode</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;host&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># environment:</span><span class=w>
+</span><span class=w>    </span><span class=c>#   CLOUDFLARE_EMAIL: </span><span class=w>
+</span><span class=w>    </span><span class=c>#   CLOUDFLARE_API_KEY: </span><span class=w>
+</span><span class=w>    </span><span class=nt>volumes</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>./Caddyfile:/caddy/Caddyfile</span><span class=w>
+</span><span class=w>      </span>- <span class=l>./certs:/caddy/certs</span><span class=w>
+</span><span class=w>      </span>- <span class=l>./.caddy:/root/.caddy</span><span class=w>
+</span><span class=w>      </span>- <span class=l>./www:/www/:rw</span><span class=w>
+</span></code></pre></td></tr></table></div></div><p>或直接使用 cat</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh>cat &gt; docker-compose.yaml <span class=s>&lt;&lt;EOF
+</span><span class=s>version: &#39;3&#39;
+</span><span class=s>
+</span><span class=s>services:
+</span><span class=s>  caddy:
+</span><span class=s>    container_name: caddy
+</span><span class=s>    build:
+</span><span class=s>      context: ./caddy_docker
+</span><span class=s>      args:
+</span><span class=s>        network: host
+</span><span class=s>        # HTTPS_PROXY: 
+</span><span class=s>        # NO_PROXY: localhost,127.0.0.1
+</span><span class=s>    restart: always
+</span><span class=s>    network_mode: &#34;host&#34;
+</span><span class=s>    # environment:
+</span><span class=s>    #   CLOUDFLARE_EMAIL: 
+</span><span class=s>    #   CLOUDFLARE_API_KEY: 
+</span><span class=s>    volumes:
+</span><span class=s>      - ./Caddyfile:/caddy/Caddyfile
+</span><span class=s>      - ./certs:/caddy/certs
+</span><span class=s>      - ./.caddy:/root/.caddy
+</span><span class=s>      - ./www:/www/:rw
+</span><span class=s>EOF</span>
+</code></pre></td></tr></table></div></div><ol start=3><li>构建</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh>docker-compose build --force-rm
+</code></pre></td></tr></table></div></div><p><em><strong>Tips:</strong> <code>--force-rm</code> 参数是为了构建结束自动删除镜像，构建失败的场景下偷懒很有用</em></p><ol start=4><li>启动
+把自己的 Caddyfile 放在和 docker-compose.yaml 同目录下就可以启动了</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-sh data-lang=sh>docker-compose up
+</code></pre></td></tr></table></div></div><p><em><strong>Note:</strong> 第一次启动建议不要加 <code>-d</code>，在前台可以及时看到 ssl 证书是否成功签发，服务是否已经正常启动，如果有问题直接 <code>Ctrl+C</code>。正常启动后要切换至后台，<code>Ctrl+Z</code> 就可以了。</em></p><p>很重要的一点，<strong>一定要把容器的 <code>/caddy/certs</code> 挂载到宿主机上</strong>，这个目录就是 ssl 证书的存储目录，如果不挂载到宿主机上，每次重启容器都要重新签发证书，短时间内请求过多的话自然就会被 Let&rsquo;s Encrypt 拒绝访问了。</p><p>如果需要把已经构建好的 caddy 程序放到另一台同架构的机器上运行，把容器里的 <code>/usr/bin/caddy</code> 拷贝出来或者构建容器的时候把容器的 <code>/install</code> 挂载到宿主机上就行。</p><p>要记录的到这里就结束了，完整项目已上传到 github：<a href=https://github.com/niceRAM/caddy_docker>niceRAM/caddy_docker: Caddy_docker</a></p><div class=post-ref><h2 id=参考链接>参考链接</h2><ul><li><a href=https://github.com/abiosoft/caddy-docker>Docker container for Caddy</a>
 , abiosoft</li><li><a href=https://github.com/abiosoft/caddy-docker/issues/248#issuecomment-610198138>Docker-Compose Build Failure · Issue #248 · abiosoft/caddy-docker</a></li><li><a href=https://github.com/Yun-Mao/caddy_docker>Caddy_docker</a>
 , Yun-Mao</li></ul></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
 <span>niceRAM</span></p><p class=copyright-item><span>Link:</span>
