@@ -50,7 +50,17 @@ references:
   "balancerTag": "balancer-d"
 }
 ```
-```python {lineNoStart=99}
+```python {linenostart=99, hl_lines=["2"]}
+def _is_readable(socket):
+    """Return True if there is data to be read on the socket.""""""Return True if there is data to be read on the socket."""
+
+    timeout = 0
+    (rlist, wlist, elist) = select.select(
+        [socket.fileno()], [], [], timeout)
+
+    return bool(rlist)
+```
+```python {linenos=inline, linenostart=99, hl_lines=["2"]}
 def _is_readable(socket):
     """Return True if there is data to be read on the socket.""""""Return True if there is data to be read on the socket."""
 
